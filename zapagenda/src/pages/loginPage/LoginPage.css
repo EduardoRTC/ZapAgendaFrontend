@@ -77,3 +77,14 @@ html {
   line-height: 1.5;
   max-width: 300px;
 }
+/* Responsivo para telas menores */
+@media (max-width: 768px) {
+  .login-content {
+    flex-direction: column; /* Empilha os elementos em vez de lado a lado */
+    align-items: center;
+  }
+
+  .hero {
+    max-width: 100%; /* Garante que ambos ocupem a largura total em dispositivos móveis */
+  }
+}
