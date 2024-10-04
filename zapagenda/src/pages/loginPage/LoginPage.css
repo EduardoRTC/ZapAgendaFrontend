@@ -1,5 +1,6 @@
 /* Estilos globais */
-body, html {
+body,
+html {
   margin: 0;
   padding: 0;
   height: 100%;
@@ -11,12 +12,11 @@ body, html {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  background-color: #1E293B;
+  min-height: 84vh;
+  background-color: #1e293b;
   padding: 20px;
 }
 
-/* Container principal para o conteúdo */
 .login-content {
   display: flex;
   justify-content: space-between;
@@ -26,23 +26,23 @@ body, html {
   gap: 2rem;
 }
 
-.login-container { 
-  width: 100%; max-width: 400px;
-  margin-top: 20px;
-  background-color: #FFFFFF;
+.login-container {
+  width: 100%;
+  max-width: 400px;
+  background-color: #ffffff;
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-} 
+}
 
-.login-header { 
+.login-header {
   background-color: #000000;
-  color: #FFFFFF;
+  color: #ffffff;
   text-align: center;
   padding: 15px;
   font-size: 20px;
   font-weight: bold;
-  margin: 0; 
+  margin: 0;
 }
 
 /* Hero Section */
@@ -51,7 +51,7 @@ body, html {
   flex-direction: column;
   align-items: center;
   background-color: #111827;
-  padding: 2rem;
+  padding: 2.5rem;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   text-align: center;
@@ -65,14 +65,14 @@ body, html {
 
 .hero-title {
   font-size: 2.5rem;
-  color: #FFFFFF;
+  color: #ffffff;
   margin: 0;
   font-weight: bold;
 }
 
 .hero-subtitle {
   font-size: 1.1rem;
-  color: #9CA3AF;
+  color: #9ca3af;
   margin-top: 0.5rem;
   line-height: 1.5;
   max-width: 300px;
