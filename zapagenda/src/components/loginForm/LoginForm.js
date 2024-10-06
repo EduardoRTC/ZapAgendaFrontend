@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import './LoginForm.css';
 
+
+
 export default function LoginForm() {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState({});
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const newErrors = {};
@@ -26,8 +28,30 @@ export default function LoginForm() {
       setErrors({});
       console.log('Login attempted with:', login, password);
 
-      // Lógica de autenticação pode ser adicionada aqui
+      try {
+        const response = await fetch('http://localhost:3000/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ login, password }),
+        });
+    
+        const data = await response.json();
+    
+        if (response.ok) {
+          console.log('Login bem-sucedido:', data);
+          // Armazene o token JWT conforme necessário (por exemplo, localStorage)
+          localStorage.setItem('token', data.token);
+          window.location.href = '/dashboard';
+        } else {
+          console.error('Erro de login:', data.message);
+        }
+      } catch (error) {
+        console.error('Erro na requisição:', error);
+      }
     }
+    
   };
 
   return (
