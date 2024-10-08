@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import './LoginForm.css';
 
-
-
 export default function LoginForm() {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
@@ -13,7 +11,7 @@ export default function LoginForm() {
 
     const newErrors = {};
 
-    // Validações dos campos
+
     if (!login) {
       newErrors.login = 'Usuário obrigatório';
     }

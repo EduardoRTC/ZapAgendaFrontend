@@ -12,7 +12,7 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 85vh;
+  min-height: calc(100vh - 10vh);
   background-color: #1e293b;
   padding: 20px;
 }
