@@ -1,5 +1,5 @@
 import React from 'react';
-import LoginForm from '../../components/loginForm/LoginForm';
+import LoginForm from '../../components/LoginForm/LoginForm';
 import './LoginPage.css';
 import logo from '../../assets/logo2.0.webp';
 

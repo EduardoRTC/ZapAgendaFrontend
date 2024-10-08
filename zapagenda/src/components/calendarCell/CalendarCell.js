@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AppointmentPopup } from '../appointmentPopup/AppointmentPopup';
+import { AppointmentPopup } from '../AppointmentPopup/AppointmentPopup';
 import './CalendarCell.css';
 
 const CalendarCell = ({ date, isCurrentMonth, isToday, appointments }) => {

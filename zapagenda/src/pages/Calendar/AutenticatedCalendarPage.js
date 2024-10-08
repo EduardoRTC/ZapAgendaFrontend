@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Calendar from '../../components/calendar/calendar';
+import Calendar from '../../components/Calendar/Calendar';
 
 const AuthenticatedCalendar = () => {
   const [userData, setUserData] = useState(null);

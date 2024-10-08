@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import LoginPage from './pages/loginPage/LoginPage';
-import Footer from './components/footer/Footer';
+import Footer from './components/Footer/Footer';
 import AuthenticatedCalendar from './pages/Calendar/AutenticatedCalendarPage';
 
 export default function App() {

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { appointments } from './appointmentsData'; // Importa os dados dos agendamentos
-import CalendarCell from '../calendarCell/CalendarCell';
+import CalendarCell from '../CalendarCell/CalendarCell';
 import './Calendar.css';
 
 const Calendar = () => {
