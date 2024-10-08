@@ -1,0 +1,220 @@
+/* Estilos gerais do calendário */
+.calendar {
+  width: 70%;
+  margin: 40px auto;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.calendar-controls {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.calendar-controls button {
+  padding: 10px 20px;
+  margin: 0 5px;
+  font-size: 16px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  transition: background-color 0.3s;
+}
+
+.calendar-controls button:hover {
+  background-color: #f0f0f0;
+}
+
+/* Cabeçalho do calendário (dias da semana) */
+.calendar-header {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); /* 7 colunas para os dias da semana */
+  background-color: #f5f5f5;
+  padding: 10px 0;
+  text-align: center;
+  font-weight: bold;
+  color: #333;
+  border-bottom: 1px solid #ddd;
+}
+
+.calendar-header-cell {
+  padding: 10px;
+  font-size: 16px;
+}
+
+/* Corpo do calendário (dias e semanas) */
+.calendar-body {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-gap: 1px;
+}
+
+.calendar-cell {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  min-height: 100px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.calendar-cell.outside-month {
+  background-color: #f5f5f5;
+  color: #ccc;
+  cursor: default;
+}
+
+.calendar-cell.today {
+  background-color: #232b42; /* Fundo escuro para destacar o dia de hoje */
+  color: #fff;
+}
+
+.cell-date {
+  font-weight: bold;
+}
+
+.appointments-list {
+  margin-top: 10px;
+}
+
+.appointment {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.appointment-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #f39c12;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.appointment-description {
+  font-size: 12px;
+}
+
+/* --- Estilos para a visualização de dia (com horários) --- */
+.day-schedule {
+  display: grid;
+  grid-template-columns: 100px 1fr; /* Coluna para os horários e outra para os compromissos */
+  grid-auto-rows: 50px; /* Cada linha (horário) tem 50px de altura */
+  width: 100%;
+  margin-top: 20px;
+}
+
+/* Cada linha de horário (09:00, 10:00, etc.) */
+.schedule-row {
+  display: contents;
+}
+
+/* Estilo dos horários (ex: 09:00, 10:00) */
+.schedule-hour {
+  padding: 10px;
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* Célula para os compromissos no horário correspondente */
+.schedule-appointment {
+  padding: 10px;
+  border: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Para alinhar os compromissos à esquerda */
+}
+
+/* Estilo para compromissos (agendamentos) */
+.appointment-item {
+  background-color: #ffeb3b; /* Cor de fundo do agendamento */
+  padding: 5px;
+  border-radius: 4px;
+  font-size: 14px;
+  width: 100%; /* O agendamento ocupa toda a célula */
+}
+
+.day-schedule {
+  display: grid;
+  grid-template-columns: 100px 1fr; /* Coluna para os horários e outra para os compromissos */
+  grid-auto-rows: 50px; /* Cada linha (horário) tem 50px de altura */
+  width: 100%;
+  margin-top: 20px;
+}
+
+/* Cada linha de horário (09:00, 10:00, etc.) */
+.schedule-row {
+  display: contents;
+}
+
+/* Estilo dos horários (ex: 09:00, 10:00) */
+.schedule-hour {
+  padding: 10px;
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* Célula para os compromissos no horário correspondente */
+.schedule-appointment {
+  padding: 10px;
+  border: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Para alinhar os compromissos à esquerda */
+}
+
+/* Estilo para compromissos (agendamentos) */
+.appointment-item {
+  background-color: #2ecc71; /* Cor de fundo do agendamento */
+  padding: 5px;
+  border-radius: 4px;
+  font-size: 14px;
+  width: 100%; /* O agendamento ocupa toda a célula */
+}
+
+/* Estilo para quando não há agendamento */
+.no-appointment {
+  color: #ccc;
+  font-style: italic;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .calendar {
+    width: 95%;
+  }
+
+  .calendar-cell {
+    min-height: 80px;
+  }
+
+  .calendar-header-cell,
+  .appointment-description {
+    font-size: 14px;
+  }
+}
+
+/* Estilo do título dinâmico (mês ou dia/mês) */
+.calendar-header-title {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.calendar-header-title h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+  color: #333;
+}
