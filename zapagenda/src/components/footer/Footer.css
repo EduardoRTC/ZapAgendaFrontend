@@ -1,49 +1,49 @@
 .footer {
-    background-color: #000000;
-    color: #ffffff;
-    padding: 1.5rem 0;
-    font-family: Arial, sans-serif;
-    height: 5vh;
-  }
-  
+  background-color: #000000;
+  color: #ffffff;
+  padding: 1.5rem 0;
+  font-family: Arial, sans-serif;
+  height: 5vh;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.logo-icon {
+  width: 2rem;
+  height: 2rem;
+  margin-right: 0.5rem;
+}
+
+.company-name {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.copyright {
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
   .footer-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1rem;
-    display: flex;
     flex-direction: column;
-    align-items: center;
-  }
-  
-  .footer-logo {
-    display: flex;
-    align-items: center;
-    margin-bottom: 1rem;
-  }
-  
-  .logo-icon {
-    width: 2rem;
-    height: 2rem;
-    margin-right: 0.5rem;
-  }
-  
-  .company-name {
-    font-size: 1.2rem;
-    font-weight: bold;
-  }
-  
-  .copyright {
-    font-size: 0.9rem;
     text-align: center;
   }
-  
-  @media (max-width: 768px) {
-    .footer-content {
-      flex-direction: column;
-      text-align: center;
-    }
-  
-    .footer-logo {
-      margin-bottom: 1rem;
-    }
+
+  .footer-logo {
+    margin-bottom: 1rem;
   }
+}
