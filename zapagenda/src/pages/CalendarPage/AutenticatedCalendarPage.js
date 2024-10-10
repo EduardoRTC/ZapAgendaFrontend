@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Calendar from '../../components/Calendar/Calendar';
+import Header from '../../components/Header/MainHeader/Header';
 
 const AuthenticatedCalendar = () => {
-  const [userData, setUserData] = useState(null);
+ // const [userData, setUserData] = useState(null);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -35,9 +36,7 @@ const AuthenticatedCalendar = () => {
         */
         
         // Para fins de teste sem autenticação, você pode simplesmente simular um dado de usuário
-        const data = { usuario: 'Teste Usuário' };
-        setUserData(data); // Atualiza os dados do usuário com um valor simulado
-
+      
       } catch (error) {
         console.error('Erro na requisição:', error); // Lida com erros de rede
       }
@@ -46,13 +45,11 @@ const AuthenticatedCalendar = () => {
     fetchUserData();
   }, []);
 
-  if (!userData) {
-    return <p>Carregando...</p>; // Mostra o carregando até que os dados estejam disponíveis
-  }
+
 
   return (
     <div>
-      <h1>Bem-vindo ao Calendário, {userData.usuario}!</h1>
+      <Header/>
       <Calendar />
     </div>
   );

@@ -2,12 +2,10 @@ import React from 'react';
 import LoginForm from '../../components/LoginForm/LoginForm';
 import './LoginPage.css';
 import logo from "../../assets/Logos/logo2.0.webp";
-import HeaderLogin from '../../components/Header/HeaderLogin/HeaderLogin';
 
 export default function LoginPage() {
   return (
     <>
-      <HeaderLogin />
       <div className="login-page">
         <div className="login-content">
           <div className="login-container">

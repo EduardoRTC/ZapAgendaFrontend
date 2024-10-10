@@ -1,0 +1,40 @@
+.Header {
+  background-color: var(--azulPrincipal);
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Centraliza o conteúdo por padrão */
+  position: relative; /* Para posicionar o ícone à direita */
+  padding-top: 25px;
+  padding-bottom: 25px;
+  height: 70px;
+}
+
+.Header-logo {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  flex-grow: 1; /* O logo ocupa o centro */
+  padding-left: 25px;
+}
+
+img {
+  height: 45px;
+}
+.Header-logo span {
+  color: #fff;
+  padding-left: 12px;
+}
+
+.Header-icon {
+  display: flex;
+  align-items: center;
+  color: white;
+  position: absolute; /* Posiciona o ícone de  sobreposto à direita */
+  right: 55px; /* Ajuste o espaço para o alinhamento à direita */
+}
+
+.Header-icon__text {
+  font-weight: bold;
+  font-size: var(--20px);
+  margin-left: 13px;
+}
