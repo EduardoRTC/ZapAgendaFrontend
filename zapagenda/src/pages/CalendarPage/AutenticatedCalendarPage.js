@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Calendar from '../../components/Calendar/Calendar';
+import Calendar from '../../components/Calendar/calendar';
 import Header from '../../components/Header/MainHeader/Header';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import "./AutenticatedCalendarPage.css"

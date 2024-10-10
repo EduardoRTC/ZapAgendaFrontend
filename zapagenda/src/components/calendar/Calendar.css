@@ -15,6 +15,7 @@
   align-items: center; /* Centraliza verticalmente */
   padding: 10px;
   padding-bottom: 25px;
+
 }
 
 /* Estilo do título dinâmico (mês ou dia/mês) */
@@ -39,10 +40,16 @@
   background-color: #fff;
   transition: background-color 0.3s;
 }
-
-.calendar-controls button:hover {
-  background-color: #f0f0f0;
+.calendar-controls button.selected {
+  background-color: var(--azulPrincipal) ;/* Cor de fundo para o botão selecionado */
+  color: white; /* Cor do texto */
+  border-color: var(--azulPrincipal); /* Borda da mesma cor */
 }
+.calendar-controls button:hover {
+  background-color: var(--azulPrincipal);
+  color: #fff;
+}
+
 
 /* Cabeçalho do calendário (dias da semana) */
 .calendar-header {

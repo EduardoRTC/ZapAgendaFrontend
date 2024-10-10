@@ -194,9 +194,9 @@ const Calendar = () => {
     </div>
     <div className="calendar-controls">
       <button onClick={previous}>&lt;</button> {/* Botão de retroceder */}
-      <button onClick={() => setViewMode('day')}>Dia</button>
-      <button onClick={() => setViewMode('week')}>Semana</button>
-      <button onClick={() => setViewMode('month')}>Mês</button>
+      <button onClick={() => setViewMode('day')}className={viewMode === 'day' ? 'selected' : ''}>Dia</button>
+      <button onClick={() => setViewMode('week')}className={viewMode === 'week' ? 'selected' : ''}>Semana</button>
+      <button onClick={() => setViewMode('month')}className={viewMode === 'month' ? 'selected' : ''}>Mês</button>
       <button onClick={next}>&gt;</button> {/* Botão de avançar */}
     </div>
   </div>
