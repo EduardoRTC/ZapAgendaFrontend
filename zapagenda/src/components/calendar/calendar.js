@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { appointments } from './appointmentsData'; // Importa os dados dos agendamentos
+import { appointments } from './appointmentsData';
 import CalendarCell from '../CalendarCell/CalendarCell';
 import './Calendar.css';
 
@@ -7,7 +7,11 @@ const Calendar = () => {
   const [viewMode, setViewMode] = useState('month'); // 'day', 'week', 'month'
   const [selectedDate, setSelectedDate] = useState(new Date());
 
-  // Função para formatar a data como YYYY-MM-DD
+  const handleDayClick = (date) => {
+    setSelectedDate(date);
+    setViewMode('day');
+  };
+
   const formatDate = (date) => {
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -15,7 +19,6 @@ const Calendar = () => {
     return `${year}-${month}-${day}`;
   };
 
-  // Função para verificar se a data é hoje
   const isToday = (date) => {
     const today = new Date();
     return (
@@ -25,7 +28,6 @@ const Calendar = () => {
     );
   };
 
-  // Função para avançar no calendário (dia, semana ou mês)
   const next = () => {
     let newDate = new Date(selectedDate);
     if (viewMode === 'day') {
@@ -38,7 +40,6 @@ const Calendar = () => {
     setSelectedDate(newDate);
   };
 
-  // Função para retroceder no calendário (dia, semana ou mês)
   const previous = () => {
     let newDate = new Date(selectedDate);
     if (viewMode === 'day') {
@@ -51,7 +52,6 @@ const Calendar = () => {
     setSelectedDate(newDate);
   };
 
-  // Função para renderizar o cabeçalho dinâmico (mês/ano ou dia/mês/ano)
   const renderHeaderTitle = () => {
     const monthNames = [
       'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
@@ -59,15 +59,14 @@ const Calendar = () => {
     ];
 
     if (viewMode === 'month' || viewMode === 'week') {
-      return `${monthNames[selectedDate.getMonth()]} ${selectedDate.getFullYear()}`;  // Exibe o mês e o ano
+      return `${monthNames[selectedDate.getMonth()]} ${selectedDate.getFullYear()}`;
     }
 
     if (viewMode === 'day') {
-      return `${selectedDate.getDate()} de ${monthNames[selectedDate.getMonth()]} de ${selectedDate.getFullYear()}`; // Exibe o dia, mês e ano
+      return `${selectedDate.getDate()} de ${monthNames[selectedDate.getMonth()]} de ${selectedDate.getFullYear()}`;
     }
   };
 
-  // Função para renderizar a visualização de dia, semana ou mês
   const renderCalendar = () => {
     if (viewMode === 'day') {
       const hours = Array.from({ length: 12 }, (_, i) => i + 9);
@@ -104,40 +103,7 @@ const Calendar = () => {
           })}
         </div>
       );
-    } else if (viewMode === 'week') {
-      const startOfWeek = new Date(selectedDate);
-      startOfWeek.setDate(selectedDate.getDate() - selectedDate.getDay());
-      const weekDays = Array.from({ length: 7 }, (_, i) => new Date(startOfWeek.getTime() + i * 86400000));
-
-      return (
-        <>
-          <div className="calendar-header">
-            {['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'].map((day, index) => (
-              <div key={index} className="calendar-header-cell">
-                {day}
-              </div>
-            ))}
-          </div>
-          <div className="calendar-body">
-            {weekDays.map((day, index) => {
-              const appointmentsForDay = appointments.filter(
-                (appointment) => appointment.date === formatDate(day)
-              );
-
-              return (
-                <CalendarCell
-                  key={index}
-                  date={day.getDate()}
-                  isCurrentMonth={day.getMonth() === selectedDate.getMonth()}
-                  isToday={isToday(day)}
-                  appointments={appointmentsForDay}
-                />
-              );
-            })}
-          </div>
-        </>
-      );
-    } else {
+    } else if (viewMode === 'month') {
       const startOfMonth = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), 1);
       const endOfMonth = new Date(selectedDate.getFullYear(), selectedDate.getMonth() + 1, 0);
       const startDayOfWeek = startOfMonth.getDay();
@@ -173,10 +139,11 @@ const Calendar = () => {
               return (
                 <CalendarCell
                   key={index}
-                  date={day.getDate()}
+                  date={day}
                   isCurrentMonth={day.getMonth() === selectedDate.getMonth()}
                   isToday={isToday(day)}
                   appointments={appointmentsForDay}
+                  onClick={handleDayClick} // Passa a função handleDayClick
                 />
               );
             })}
@@ -192,11 +159,11 @@ const Calendar = () => {
         <h2>{renderHeaderTitle()}</h2>
       </div>
       <div className="calendar-controls">
-        <button onClick={previous}>&lt;</button> {/* Botão de retroceder */}
+        <button onClick={previous}>&lt;</button>
         <button onClick={() => setViewMode('day')}>Dia</button>
         <button onClick={() => setViewMode('week')}>Semana</button>
         <button onClick={() => setViewMode('month')}>Mês</button>
-        <button onClick={next}>&gt;</button> {/* Botão de avançar */}
+        <button onClick={next}>&gt;</button>
       </div>
       {renderCalendar()}
     </div>

@@ -20,19 +20,29 @@
 
 .cell-date {
   font-weight: bold;
+  padding: 5px;
 }
 
 .appointments-list {
-  max-height: 80px; /* Limita a altura dos agendamentos */
-  overflow-y: auto; /* Habilita o scroll vertical */
-  padding-right: 5px; /* Para evitar que o conteúdo fique escondido atrás da barra de rolagem */
+  max-height: 80px;
+  /* Limita a altura dos agendamentos */
+  overflow-y: auto;
+  /* Habilita o scroll vertical */
+  padding-right: 5px;
+  /* Para evitar que o conteúdo fique escondido atrás da barra de rolagem */
 }
 
 .appointment {
   display: flex;
   align-items: center;
   margin-bottom: 5px;
-  font-size: 12px; /* Tamanho da fonte dos agendamentos */
+  font-size: 12px;
+  /* Tamanho da fonte dos agendamentos */
+  padding: 3px;
+}
+
+.appointment-description {
+  font-size: 500px;
 }
 
 .appointment-dot {
@@ -42,17 +52,24 @@
   margin-right: 8px;
 }
 
+.appointment-description {
+  font-size: 16px;
+}
+
 /* Estilos para diferentes tipos de eventos */
 .appointment.warning .appointment-dot {
-  background-color: #f39c12; /* Cor laranja para agendamentos de aviso */
+  background-color: #f39c12;
+  /* Cor laranja para agendamentos de aviso */
 }
 
 .appointment.error .appointment-dot {
-  background-color: #e74c3c; /* Cor vermelha para agendamentos de erro */
+  background-color: #e74c3c;
+  /* Cor vermelha para agendamentos de erro */
 }
 
 .appointment.Agendamento .appointment-dot {
-  background-color: #2ecc71; /* Cor verde para agendamentos de sucesso */
+  background-color: #2ecc71;
+  /* Cor verde para agendamentos de sucesso */
 }
 
 .appointment:hover {
@@ -60,6 +77,7 @@
   color: #ffffff;
   padding: 2px;
 }
+
 /* Estilo para o popup de agendamento */
 .popup {
   position: fixed;

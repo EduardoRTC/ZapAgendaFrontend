@@ -2,8 +2,8 @@
     background-color: var(--azulPrincipal);
     display: flex;
     align-items: center;
-    justify-content: center; /* Centraliza o conteúdo por padrão */
-    position: relative; /* Para posicionar o ícone à direita */
+    justify-content: center; 
+    position: relative; 
     padding-top: 25px;
 }
 
@@ -11,15 +11,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-grow: 1; /* O logo ocupa o centro */
+    flex-grow: 1; 
 }
 
 .HeaderLogin-icon {
     display: flex;
     align-items: center;
     color: white;
-    position: absolute; /* Posiciona o ícone de login sobreposto à direita */
-    right: 80px; /* Ajuste o espaço para o alinhamento à direita */
+    position: absolute; 
+    right: 80px; 
 }
 
 .HeaderLogin-icon__text {

@@ -8,6 +8,7 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   padding: 20px;
   box-sizing: border-box;
+  height: 100vh;
 }
 
 .calendar-controls {
@@ -97,10 +98,6 @@
   background-color: #f39c12;
   border-radius: 50%;
   margin-right: 8px;
-}
-
-.appointment-description {
-  font-size: 12px;
 }
 
 /* --- Estilos para a visualização de dia (com horários) --- */
