@@ -1,12 +1,13 @@
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
+  background-color: #e0e0e0;
 }
 
 :root {
-  --azulPrincipal: #161D30;
+  --azulPrincipal: #161d30;
   --20px: 1.25rem;
   --22px: 1.38rem;
-  --24px: 1.50rem;
+  --24px: 1.5rem;
   --26px: 1.63rem;
   --30px: 1.88rem;
   --32px: 2rem;

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Calendar from '../../components/Calendar/Calendar';
 import Header from '../../components/Header/MainHeader/Header';
+import Sidebar from '../../components/Sidebar/Sidebar';
+import "./AutenticatedCalendarPage.css"
 
 const AuthenticatedCalendar = () => {
  // const [userData, setUserData] = useState(null);
@@ -49,9 +51,14 @@ const AuthenticatedCalendar = () => {
 
   return (
     <div>
-      <Header/>
-      <Calendar />
+    <Header />
+    <div className="main-container">
+      <Sidebar />
+      <div className="calendar-container">
+        <Calendar />
+      </div>
     </div>
+  </div>
   );
 };
 
