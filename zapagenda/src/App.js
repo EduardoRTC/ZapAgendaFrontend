@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import LoginPage from './pages/loginPage/LoginPage';
-import Footer from './components/Footer/Footer';
 import AuthenticatedCalendar from './pages/CalendarPage/AutenticatedCalendarPage';
+import Footer from "./components/Footer/Footer"
 
 export default function App() {
   // const token = localStorage.getItem('token'); // Comentado por enquanto
@@ -20,7 +20,7 @@ export default function App() {
 
         {/* Outras rotas, como o dashboard, podem ser adicionadas futuramente */}
       </Routes>
-      <Footer />
+      <Footer/>
     </Router>
-  );
+ );
 }

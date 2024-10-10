@@ -1,21 +1,36 @@
 /* Estilos gerais do calendário */
 .calendar {
   width: 70%;
-  margin: 40px auto;
-  border: 1px solid #e0e0e0;
   border-radius: 8px;
-  background-color: #fff;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
   padding: 20px;
   box-sizing: border-box;
+  position: absolute;
+}
+
+.calendar-header-container {
+  position: relative;
+  display: flex;
+  justify-content: center; /* Centraliza o título */
+  align-items: center; /* Centraliza verticalmente */
+  padding: 10px;
+  padding-bottom: 25px;
+
+}
+
+/* Estilo do título dinâmico (mês ou dia/mês) */
+.calendar-header-title {
+  font-size: 24px;
+  text-align: center; /* Título no centro */
+  flex-grow: 1; /* Faz o título crescer para ocupar o espaço */
 }
 
 .calendar-controls {
+  position: absolute; /* Coloca os botões na direita */
+  right: 0;
   display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
+  gap: 5px; /* Espaçamento entre os botões */
 }
-
 .calendar-controls button {
   padding: 10px 20px;
   margin: 0 5px;
@@ -25,10 +40,16 @@
   background-color: #fff;
   transition: background-color 0.3s;
 }
-
-.calendar-controls button:hover {
-  background-color: #f0f0f0;
+.calendar-controls button.selected {
+  background-color: var(--azulPrincipal) ;/* Cor de fundo para o botão selecionado */
+  color: white; /* Cor do texto */
+  border-color: var(--azulPrincipal); /* Borda da mesma cor */
 }
+.calendar-controls button:hover {
+  background-color: var(--azulPrincipal);
+  color: #fff;
+}
+
 
 /* Cabeçalho do calendário (dias da semana) */
 .calendar-header {
@@ -204,12 +225,6 @@
   .appointment-description {
     font-size: 14px;
   }
-}
-
-/* Estilo do título dinâmico (mês ou dia/mês) */
-.calendar-header-title {
-  text-align: center;
-  margin-bottom: 20px;
 }
 
 .calendar-header-title h2 {
