@@ -2,6 +2,7 @@ import React from 'react';
 import LoginForm from '../../components/LoginForm/LoginForm';
 import './LoginPage.css';
 import logo from "../../assets/Logos/logo2.0.webp";
+import Footer from "../../components/Footer/Footer"
 
 export default function LoginPage() {
   return (
@@ -19,7 +20,7 @@ export default function LoginPage() {
           </div>
         </div>
       </div>
-
+    <Footer/>
     </>
   );
 }

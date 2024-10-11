@@ -2,50 +2,44 @@ import React, { useState } from 'react';
 import { AppointmentPopup } from '../AppointmentPopup/AppointmentPopup';
 import './CalendarCell.css';
 
-const CalendarCell = ({ date, isCurrentMonth, isToday, appointments }) => {
+const CalendarCell = ({ date, isCurrentMonth, isToday, appointments, onClick }) => {
   const [selectedAppointment, setSelectedAppointment] = useState(null);
 
   const handleAppointmentClick = (appointment) => {
     setSelectedAppointment(appointment);
   };
 
-  const closePopup = () => {
+  const closePopup = (e) => {
+    e.stopPropagation(); // Impede que o clique de fechar afete a célula do calendário
     setSelectedAppointment(null);
   };
 
   return (
-    <div className={`calendar-cell ${isCurrentMonth ? '' : 'outside-month'} ${isToday ? 'today' : ''}`}>
-      <div className="cell-date">{date}</div>
+    <div 
+      className={`calendar-cell ${isCurrentMonth ? '' : 'outside-month'} ${isToday ? 'today' : ''}`} 
+      onClick={() => onClick(date)} // Chama onClick com a data do dia clicado
+    >
+      <div className="cell-date">{date.getDate()}</div>
       <div className="appointments-list">
         {appointments.map((appointment) => (
           <div
             key={appointment.id}
             className={`appointment ${appointment.type}`}
-            onClick={() => handleAppointmentClick(appointment)}
+            onClick={(e) => {
+              e.stopPropagation(); // Evita que o clique no agendamento acione o clique da célula
+              handleAppointmentClick(appointment);
+            }}
           >
             <span className="appointment-dot"></span>
             <span className="appointment-description">{appointment.description}</span>
           </div>
         ))}
       </div>
+
+      {/* Renderiza o AppointmentPopup quando um agendamento é selecionado */}
       {selectedAppointment && (
-        <div className="appointment-popup-overlay">
-          <div className="appointment-popup">
-            <div className="appointment-popup-header">
-              <h2>Detalhes do Agendamento</h2>
-              <button className="close-button" onClick={closePopup}>&times;</button>
-            </div>
-            <div className="appointment-popup-content">
-              <p><strong>Descrição:</strong> {selectedAppointment.description}</p>
-              <p><strong>Médico:</strong> {selectedAppointment.doctor}</p>
-              <p><strong>Paciente:</strong> {selectedAppointment.patient}</p>
-              <p><strong>Data:</strong> {selectedAppointment.date}</p>
-              <p><strong>Hora:</strong> {selectedAppointment.time}</p>
-              <p><strong>Plano de Saúde:</strong> {selectedAppointment.healthPlan}</p>
-              <p><strong>Motivo:</strong> {selectedAppointment.reason}</p>
-              <p className="observations"><strong>Observações:</strong> {selectedAppointment.observations}</p>
-            </div>
-          </div>
+        <div className="appointment-popup-overlay" onClick={e => e.stopPropagation()}>
+          <AppointmentPopup appointment={selectedAppointment} onClose={closePopup} />
         </div>
       )}
     </div>
