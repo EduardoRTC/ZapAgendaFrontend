@@ -1,8 +1,13 @@
 .main-container {
-  display: flex; /* Sidebar e calendário lado a lado */
+  display: flex;
+  height: calc(
+    100vh - 60px
+  ); /* Altura total menos a altura do header (ajuste conforme necessário) */
 }
 
 .calendar-container {
-  margin-left: 50px;
-  padding-top: 50px;
+  flex-grow: 1; /* Permite que o contêiner do calendário ocupe o espaço restante */
+  padding: 20px 30px;
+  display: flex;
+  flex-direction: column;
 }

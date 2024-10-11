@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Calendar from '../../components/Calendar/calendar';
 import Header from '../../components/Header/MainHeader/Header';
 import Sidebar from '../../components/Sidebar/Sidebar';
+import { CalendarProvider } from '../../context/CalendarContext'
 import "./AutenticatedCalendarPage.css"
 
 const AuthenticatedCalendar = () => {
@@ -55,7 +56,9 @@ const AuthenticatedCalendar = () => {
     <div className="main-container">
       <Sidebar />
       <div className="calendar-container">
+      <CalendarProvider>
         <Calendar />
+        </CalendarProvider>
       </div>
     </div>
   </div>
