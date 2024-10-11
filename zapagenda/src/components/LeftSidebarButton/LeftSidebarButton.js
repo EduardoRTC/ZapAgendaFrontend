@@ -1,5 +1,5 @@
-import React from 'react';
-import './SidebarButton.css'; // Importando o CSS do botão
+import React from "react";
+import "./LeftSidebarButton.css"; // Importando o CSS do botão
 
 const SidebarButton = ({ title, icon }) => {
   return (

@@ -1,13 +1,42 @@
+/* AutenticatedCalendarPage.css */
+.authenticated-calendar {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
 .main-container {
   display: flex;
-  height: calc(
-    100vh - 60px
-  ); /* Altura total menos a altura do header (ajuste conforme necessário) */
+  flex-grow: 1;
+}
+
+.content-container {
+  display: flex;
+  flex-grow: 1;
+  align-items: flex-start; /* Alinha itens ao topo para evitar que o painel se estique */
 }
 
 .calendar-container {
-  flex-grow: 1; /* Permite que o contêiner do calendário ocupe o espaço restante */
-  padding: 20px 30px;
+  flex-grow: 1;
   display: flex;
-  flex-direction: column;
+  padding: 20px;
+  padding: 30px;
+  justify-content: space-around;
+}
+
+.next-appointments-panel {
+  width: 300px;
+  border-left: 1px solid #ddd;
+}
+
+@media (max-width: 768px) {
+  .next-appointments-panel {
+    width: 100%;
+    border-left: none;
+    border-top: 1px solid #ddd;
+  }
+
+  .content-container {
+    flex-direction: column;
+  }
 }

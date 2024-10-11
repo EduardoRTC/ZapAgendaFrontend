@@ -1,7 +1,12 @@
-import React from 'react';
-import './Sidebar.css'; // Importando o arquivo CSS
-import SidebarButton from '../SidebarButton/SidebarButton';
-import { FaCalendarAlt, FaComments, FaUserFriends, FaUserTie } from 'react-icons/fa'; // Ícones
+import React from "react";
+import "./LeftSidebar.css"; // Importando o arquivo CSS
+import SidebarButton from "../LeftSidebarButton/LeftSidebarButton";
+import {
+  FaCalendarAlt,
+  FaComments,
+  FaUserFriends,
+  FaUserTie,
+} from "react-icons/fa"; // Ícones
 
 const Sidebar = () => {
   return (
