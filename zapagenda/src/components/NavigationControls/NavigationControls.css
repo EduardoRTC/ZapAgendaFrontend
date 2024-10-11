@@ -16,7 +16,7 @@
 
 .calendar-controls button.selected,
 .calendar-controls button:hover {
-  background-color: #2196f3;
+  background-color: var(--azulPrincipal);
   color: #fff;
-  border-color: #2196f3;
+  border-color: var(--azulPrincipal);
 }
