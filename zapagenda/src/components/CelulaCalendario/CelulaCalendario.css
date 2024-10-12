@@ -7,6 +7,12 @@
   position: relative;
 }
 
+.celula-calendario:hover {
+  background-color: var(--azulPrincipal) ;
+  color: white;
+  border: 2px solid black
+}
+
 .celula-calendario.fora-mes {
   background-color: #f9f9f9;
   color: #ccc;
@@ -61,4 +67,35 @@
 .agendamento:hover {
   background-color: #f0f0f0;
   color: #000;
+}
+
+
+
+celula-dia-semana {
+  border: 1px solid #ddd;
+  min-height: 120px;
+  padding: 10px;
+  position: relative;
+}
+
+.celula-dia-semana.hoje {
+  background-color: var(--azulPrincipal);
+  color: #fff;
+}
+
+.celula-dia-semana .data-celula {
+  font-weight: bold;
+}
+
+.celula-dia-semana .lista-agendamentos {
+  margin-top: 5px;
+}
+
+.celula-dia-semana .agendamento {
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+.celula-dia-semana .agendamento:hover {
+  background-color: #f0f0f0;
 }

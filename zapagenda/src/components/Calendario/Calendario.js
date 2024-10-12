@@ -5,7 +5,7 @@ import ControlesNavegacao from '../ControlesNavegacao/ControlesNavegacao';
 import CabecalhoCalendario from '../CabecalhoCalendario/CabecalhoCalendario';
 import DiaCalendario from './DiaCalendario/DiaCalendario.js';
 import SemanaCalendario from './SemanaCalendario/SemanaCalendario.js';
-import MesCalendario from './MesCalendario/MesCalendario.js'; // Importe o novo componente
+import MesCalendario from './MesCalendario/MesCalendario.js';
 import './Calendario.css';
 
 const Calendario = () => {

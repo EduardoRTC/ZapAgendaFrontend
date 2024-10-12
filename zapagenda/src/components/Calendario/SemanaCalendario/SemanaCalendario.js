@@ -1,8 +1,9 @@
 // SemanaCalendario.jsx
 import React, { useContext } from 'react';
-import './SemanaCalendario.css'; // Certifique-se de criar o arquivo de estilos, se necessário.
+import './SemanaCalendario.css';
 import { CalendarioContext } from '../../../context/CalendarioContext';
 import { AgendamentosContext } from '../../../context/AgendamentosContext';
+import CelulaCalendario from '../../CelulaCalendario/CelulaCalendario';
 
 const SemanaCalendario = () => {
   const {
@@ -36,30 +37,16 @@ const SemanaCalendario = () => {
         );
 
         return (
-          <div
+          <CelulaCalendario
             key={index}
-            className={`celula-dia-semana ${eHoje(dia) ? 'hoje' : ''}`}
-            onClick={() => aoClicarDia(dia)}
-          >
-            <div className="data-celula">{dia.getDate()}</div>
-            <div className="lista-agendamentos">
-              {agendamentosDoDia.map((agendamento) => (
-                <div
-                  key={agendamento.id}
-                  className={`agendamento ${agendamento.tipo}`}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    aoClicarAgendamento(agendamento);
-                  }}
-                >
-                  <span className="ponto-agendamento"></span>
-                  <span className="descricao-agendamento">
-                    {agendamento.descricao}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
+            data={dia}
+            eMesAtual={true} // Na visualização semanal, todos os dias são relevantes
+            eHoje={eHoje(dia)}
+            agendamentos={agendamentosDoDia}
+            onClick={aoClicarDia}
+            aoClicarAgendamento={aoClicarAgendamento}
+            classeAdicional="celula-dia-semana" // Se precisar de estilos adicionais
+          />
         );
       })}
     </div>

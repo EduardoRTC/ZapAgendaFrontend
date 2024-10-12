@@ -8,13 +8,14 @@ const CelulaCalendario = ({
   eHoje,
   agendamentos,
   onClick,
-  aoClicarAgendamento, // Recebe a função como prop
+  aoClicarAgendamento,
+  classeAdicional = '', // Nova prop opcional
 }) => {
   return (
     <div
-      className={`celula-calendario ${eMesAtual ? '' : 'fora-do-mes'} ${
-        eHoje ? 'hoje' : ''
-      }`}
+      className={`celula-calendario ${classeAdicional} ${
+        eMesAtual ? '' : 'fora-mes'
+      } ${eHoje ? 'hoje' : ''}`}
       onClick={() => onClick(data)}
     >
       <div className="data-celula">{data.getDate()}</div>
