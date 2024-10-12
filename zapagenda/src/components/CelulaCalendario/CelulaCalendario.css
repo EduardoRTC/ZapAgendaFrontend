@@ -1,0 +1,64 @@
+/* CelulaCalendario.css */
+.celula-calendario {
+  border: 1px solid #ddd;
+  min-height: 100px;
+  padding: 10px;
+  cursor: pointer;
+  position: relative;
+}
+
+.celula-calendario.fora-mes {
+  background-color: #f9f9f9;
+  color: #ccc;
+}
+
+.celula-calendario.hoje {
+  background-color: var(--azulPrincipal);
+  color: #fff;
+}
+
+.data-celula {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.lista-agendamentos {
+  max-height: 80px;
+  overflow-y: auto;
+}
+
+.agendamento {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+  padding: 3px;
+  cursor: pointer;
+}
+
+.ponto-agendamento {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.descricao-agendamento {
+  font-size: 14px;
+}
+
+.agendamento.alerta .ponto-agendamento {
+  background-color: #f39c12;
+}
+
+.agendamento.info .ponto-agendamento {
+  background-color: #2196f3;
+}
+
+.agendamento.sucesso .ponto-agendamento {
+  background-color: #2ecc71;
+}
+
+.agendamento:hover {
+  background-color: #f0f0f0;
+  color: #000;
+}

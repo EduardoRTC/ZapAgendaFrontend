@@ -1,0 +1,41 @@
+/* PopupAgendamento.css */
+.popup-agendamento {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000; /* Aumente o z-index para garantir que o popup fique acima de outros elementos */
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.conteudo-popup {
+  background-color: #fff;
+  padding: 20px;
+  width: 90%;
+  max-width: 500px;
+  border-radius: 5px;
+  position: relative;
+  z-index: 1001; /* Certifique-se de que o conteúdo também tenha um z-index alto */
+}
+
+.conteudo-popup h3 {
+  margin-top: 0;
+}
+
+.fechar-popup {
+  margin-top: 15px;
+  padding: 5px 10px;
+  cursor: pointer;
+  background-color: #2196f3;
+  color: #fff;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.fechar-popup:hover {
+  background-color: #1976d2;
+}

@@ -1,0 +1,22 @@
+/* BotaoBarraLateral.css */
+.botao-barra-lateral {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.botao-barra-lateral:hover {
+  background-color: #2c3e50;
+}
+
+.icone-botao-barra-lateral {
+  margin-right: 15px;
+  font-size: 20px;
+}
+
+.titulo-botao-barra-lateral {
+  font-size: 16px;
+}

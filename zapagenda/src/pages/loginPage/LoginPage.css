@@ -7,8 +7,8 @@ html {
   font-family: Arial, sans-serif;
 }
 
-/* Login Page */
-.login-page {
+/* Página de Login */
+.pagina-login {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -17,7 +17,7 @@ html {
   padding: 20px;
 }
 
-.login-content {
+.conteudo-login {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -26,7 +26,7 @@ html {
   gap: 2rem;
 }
 
-.login-container {
+.container-login {
   width: 100%;
   max-width: 400px;
   background-color: #ffffff;
@@ -35,7 +35,7 @@ html {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.login-header {
+.cabecalho-login {
   background-color: #000000;
   color: #ffffff;
   text-align: center;
@@ -45,7 +45,7 @@ html {
   margin: 0;
 }
 
-/* Hero Section */
+/* Seção Hero */
 .hero {
   display: flex;
   flex-direction: column;
@@ -63,23 +63,24 @@ html {
   border-radius: 50%;
 }
 
-.hero-title {
+.titulo-hero {
   font-size: 2.5rem;
   color: #ffffff;
   margin: 0;
   font-weight: bold;
 }
 
-.hero-subtitle {
+.subtitulo-hero {
   font-size: 1.1rem;
   color: #9ca3af;
   margin-top: 0.5rem;
   line-height: 1.5;
   max-width: 300px;
 }
+
 /* Responsivo para telas menores */
 @media (max-width: 768px) {
-  .login-content {
+  .conteudo-login {
     flex-direction: column; /* Empilha os elementos em vez de lado a lado */
     align-items: center;
   }
