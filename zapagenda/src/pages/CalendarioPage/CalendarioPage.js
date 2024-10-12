@@ -6,6 +6,7 @@ import "./CalendarioPage.css";
 import BarraLateral from "../../components/BarraLateral/BarraLateral";
 import Cabecalho from "../../components/Cabecalho/Cabecalho";
 import PainelProximosAgendamentos from "../../components/PainelProximosAgendamentos/PainelProximosAgendamentos";
+import AgendamentosProvider from "../../context/AgendamentosContext";
 
 const CalendarioPage = () => {
   // const [dadosUsuario, setDadosUsuario] = useState(null);
@@ -51,10 +52,12 @@ const CalendarioPage = () => {
       <div className="container-principal">
         <BarraLateral />
         <div className="container-calendario">
-          <CalendarioProvider>
-            <Calendario />
-            <PainelProximosAgendamentos />
-          </CalendarioProvider>
+          <AgendamentosProvider>
+            <CalendarioProvider>
+              <Calendario />
+              <PainelProximosAgendamentos />
+            </CalendarioProvider>
+          </AgendamentosProvider>
         </div>
       </div>
     </div>

@@ -5,10 +5,11 @@ import CelulaCalendario from "../CelulaCalendario/CelulaCalendario";
 import ControlesNavegacao from "../ControlesNavegacao/ControlesNavegacao";
 import CabecalhoCalendario from "../CabecalhoCalendario/CabecalhoCalendario";
 import "./Calendario.css";
+import { AgendamentosContext } from "../../context/AgendamentosContext";
 
 const Calendario = () => {
-  const { modoVisualizacao, dataSelecionada, agendamentos, setModoVisualizacao, setDataSelecionada } =
-    useContext(CalendarioContext);
+  const { modoVisualizacao, dataSelecionada,setModoVisualizacao, setDataSelecionada } = useContext(CalendarioContext);
+  const { agendamentos } = useContext(AgendamentosContext)
 
   const aoClicarDia = (data) => {
     setDataSelecionada(data);
