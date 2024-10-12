@@ -1,0 +1,11 @@
+/* BarraLateral.css */
+.barra-lateral {
+  height: 100vh;
+  width: 170px;
+  background-color: var(--azulPrincipal);
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  position: relative;
+  left: 0;
+}

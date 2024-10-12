@@ -1,0 +1,23 @@
+/* ControlesDeNavegacao.css */
+
+.controles-calendario {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.controles-calendario button {
+  margin: 0 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  transition: all 0.3s ease;
+}
+
+.controles-calendario button.selecionado,
+.controles-calendario button:hover {
+  background-color: var(--azulPrincipal);
+  color: #fff;
+  border-color: var(--azulPrincipal);
+}

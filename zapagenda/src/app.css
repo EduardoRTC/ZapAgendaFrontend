@@ -1,9 +1,10 @@
-.app-layout {
+/* Estilos para o layout do aplicativo */
+.layout-aplicativo {
   display: flex;
 }
 
-.content {
-  margin-left: 250px; /* Desloca o conteúdo para a direita, levando em conta a largura da sidebar */
+.conteudo {
+  margin-left: 250px; /* Desloca o conteúdo para a direita, levando em conta a largura da barra lateral */
   padding: 20px;
   width: 100%;
 }

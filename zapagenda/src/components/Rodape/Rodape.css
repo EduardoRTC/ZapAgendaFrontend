@@ -1,0 +1,50 @@
+/* Rodape.css */
+.rodape {
+  background-color: #000000;
+  color: #ffffff;
+  padding: 1.5rem 0;
+  font-family: Arial, sans-serif;
+  height: 5vh;
+}
+
+.conteudo-rodape {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo-rodape {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.icone-logo {
+  width: 2rem;
+  height: 2rem;
+  margin-right: 0.5rem;
+}
+
+.nome-empresa {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.direitos-autorais {
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .conteudo-rodape {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .logo-rodape {
+    margin-bottom: 1rem;
+  }
+}

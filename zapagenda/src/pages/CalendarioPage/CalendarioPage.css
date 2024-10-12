@@ -1,0 +1,42 @@
+/* CalendarioPage.css */
+
+.pagina-calendario {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.container-principal {
+  display: flex;
+  flex-grow: 1;
+}
+
+.container-conteudo {
+  display: flex;
+  flex-grow: 1;
+  align-items: flex-start; /* Alinha itens ao topo para evitar que o painel se estique */
+}
+
+.container-calendario {
+  flex-grow: 1;
+  display: flex;
+  padding: 30px;
+  justify-content: space-around;
+}
+
+.painel-proximos-agendamentos {
+  width: 300px;
+  border-left: 1px solid #ddd;
+}
+
+@media (max-width: 768px) {
+  .painel-proximos-agendamentos {
+    width: 100%;
+    border-left: none;
+    border-top: 1px solid #ddd;
+  }
+
+  .container-conteudo {
+    flex-direction: column;
+  }
+}

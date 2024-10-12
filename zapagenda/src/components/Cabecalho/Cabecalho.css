@@ -1,0 +1,42 @@
+/* Cabecalho.css */
+.cabecalho {
+  background-color: var(--azulPrincipal);
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Centraliza o conteúdo por padrão */
+  position: relative; /* Para posicionar o ícone à direita */
+  padding-top: 25px;
+  padding-bottom: 25px;
+  height: 30px;
+}
+
+.logo-cabecalho {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  flex-grow: 1; /* O logo ocupa o centro */
+  padding-left: 25px;
+}
+
+header img {
+  height: 30px;
+}
+
+.logo-cabecalho span {
+  color: #fff;
+  padding-left: 12px;
+}
+
+.icone-cabecalho {
+  display: flex;
+  align-items: center;
+  color: white;
+  position: absolute; /* Posiciona o ícone sobreposto à direita */
+  right: 55px; /* Ajuste o espaço para o alinhamento à direita */
+}
+
+.texto-icone-cabecalho {
+  font-weight: bold;
+  font-size: var(--20px);
+  margin-left: 13px;
+}
