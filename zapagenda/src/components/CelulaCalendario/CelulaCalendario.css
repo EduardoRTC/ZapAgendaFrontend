@@ -52,16 +52,16 @@
   font-size: 14px;
 }
 
-.agendamento.alerta .ponto-agendamento {
+.warning .ponto-agendamento {
   background-color: #f39c12;
 }
 
-.agendamento.info .ponto-agendamento {
-  background-color: #2196f3;
+.agendado .ponto-agendamento {
+  background-color: green;
 }
 
-.agendamento.sucesso .ponto-agendamento {
-  background-color: #2ecc71;
+.error .ponto-agendamento {
+  background-color: red;
 }
 
 .agendamento:hover {

@@ -13,9 +13,8 @@ const CelulaCalendario = ({
 }) => {
   return (
     <div
-      className={`celula-calendario ${classeAdicional} ${
-        eMesAtual ? '' : 'fora-mes'
-      } ${eHoje ? 'hoje' : ''}`}
+      className={`celula-calendario ${classeAdicional} ${eMesAtual ? '' : 'fora-mes'
+        } ${eHoje ? 'hoje' : ''}`}
       onClick={() => onClick(data)}
     >
       <div className="data-celula">{data.getDate()}</div>

@@ -15,7 +15,7 @@ export const CalendarioProvider = ({ children }) => {
 
   const eHoje = (data) =>  isToday(data) ;
 
-  const aoClicarDia = (data) => {
+  const selecionaDiaClicado = (data) => {
     setDataSelecionada(data);
     setModoVisualizacao('dia');
   };
@@ -32,7 +32,7 @@ export const CalendarioProvider = ({ children }) => {
     setDataSelecionada,
     formatarData,
     eHoje,
-    aoClicarDia,
+    selecionaDiaClicado,
     agendamentoSelecionado,
     definirAgendamentoSelecionado,
     aoClicarAgendamento, // Adicionado ao valor do contexto
