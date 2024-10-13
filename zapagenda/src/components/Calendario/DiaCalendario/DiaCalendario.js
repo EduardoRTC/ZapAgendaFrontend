@@ -8,10 +8,9 @@ export default function DiaCalendario() {
   const {
     dataSelecionada,
     formatarData,
-    aoClicarAgendamento, // Importado do contexto
   } = useContext(CalendarioContext);
 
-  const { agendamentos } = useContext(AgendamentosContext);
+  const { agendamentos, aoClicarAgendamento } = useContext(AgendamentosContext);
 
   const dataSelecionadaFormatada = formatarData(dataSelecionada);
 

@@ -1,6 +1,5 @@
-// MesCalendario.jsx
 import React, { useContext } from 'react';
-import './MesCalendario.css'; // Crie este arquivo de estilo, se necessário
+import './MesCalendario.css';
 import { CalendarioContext } from '../../../context/CalendarioContext';
 import { AgendamentosContext } from '../../../context/AgendamentosContext';
 import CelulaCalendario from '../../CelulaCalendario/CelulaCalendario';
@@ -11,10 +10,9 @@ const MesCalendario = () => {
     formatarData,
     eHoje,
     aoClicarDia,
-    aoClicarAgendamento,
   } = useContext(CalendarioContext);
 
-  const { agendamentos } = useContext(AgendamentosContext);
+  const { agendamentos,aoClicarAgendamento } = useContext(AgendamentosContext);
 
   const inicioMes = new Date(
     dataSelecionada.getFullYear(),

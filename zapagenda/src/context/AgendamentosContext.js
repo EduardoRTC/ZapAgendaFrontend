@@ -1,10 +1,15 @@
 import React, { createContext, useEffect, useState } from 'react'
-import { appointments } from './appointmentsData'; 
+import { appointments } from './appointmentsData';
 
 export const AgendamentosContext = createContext()
 
 export default function AgendamentosProvider({ children }) {
     const [agendamentos, setAgendamentos] = useState([]);
+    const [agendamentoSelecionado, definirAgendamentoSelecionado] = useState(null);
+
+    const aoClicarAgendamento = (agendamento) => {
+        definirAgendamentoSelecionado(agendamento);
+    };
 
     useEffect(() => {
         // Carrega os agendamentos do dadosAgendamentos.js
@@ -25,7 +30,9 @@ export default function AgendamentosProvider({ children }) {
     return (
         <AgendamentosContext.Provider value={{
             setAgendamentos,
-            agendamentos
+            agendamentos,
+            agendamentoSelecionado,
+            aoClicarAgendamento
         }
         }>{children}</AgendamentosContext.Provider>
     )

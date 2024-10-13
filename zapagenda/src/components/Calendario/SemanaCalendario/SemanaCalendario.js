@@ -1,4 +1,3 @@
-// SemanaCalendario.jsx
 import React, { useContext } from 'react';
 import './SemanaCalendario.css';
 import { CalendarioContext } from '../../../context/CalendarioContext';
@@ -13,16 +12,15 @@ const SemanaCalendario = () => {
     formatarData,
     eHoje,
     selecionaDiaClicado,
-    aoClicarAgendamento,
   } = useContext(CalendarioContext);
 
-  const { agendamentos } = useContext(AgendamentosContext);
+  const { agendamentos, aoClicarAgendamento } = useContext(AgendamentosContext);
 
-  //Gera o calendário de semanal
-  const inicioSemana = startOfWeek(dataSelecionada, {weekStartsOn:0})
+  //Gera o calendário semanal
+  const inicioSemana = startOfWeek(dataSelecionada, { weekStartsOn: 0 })
   const semana = [];
   for (let i = 0; i < 7; i++) {
-    semana.push(addDays(inicioSemana,i))
+    semana.push(addDays(inicioSemana, i))
   }
 
   return (
@@ -37,12 +35,12 @@ const SemanaCalendario = () => {
           <CelulaCalendario
             key={index}
             data={dia}
-            eMesAtual={true} 
+            eMesAtual={true}
             eHoje={eHoje(dia)}
             agendamentos={agendamentosDoDia}
             onClick={selecionaDiaClicado}
             aoClicarAgendamento={aoClicarAgendamento}
-            classeAdicional="celula-dia-semana" 
+            classeAdicional="celula-dia-semana"
           />
         );
       })}
