@@ -16,20 +16,20 @@ const SemanaCalendario = () => {
 
   const { agendamentos } = useContext(AgendamentosContext);
 
-  const inicioSemana = new Date(dataSelecionada);
-  const diaSemana = inicioSemana.getDay();
-  inicioSemana.setDate(inicioSemana.getDate() - diaSemana);
+  const inicioSemana = new Date(dataSelecionada); //Cria uma nova instância do dia de hoje para não mutar a data selecionada
+  const diaSemana = inicioSemana.getDay(); // Pega a data selecionada e descobre o dia da semana, cada dia da semana tendo um valor atribuido de 0 a 6 
+  inicioSemana.setDate(inicioSemana.getDate() - diaSemana); // Transforma a variável InicioSemana para o primeiro dia da semana
 
-  const dias = [];
+  const semana = [];
   for (let i = 0; i < 7; i++) {
-    const data = new Date(inicioSemana);
-    data.setDate(inicioSemana.getDate() + i);
-    dias.push(data);
+    const diaDaSemana = new Date(inicioSemana);
+    diaDaSemana.setDate(inicioSemana.getDate() + i);
+    semana.push(diaDaSemana);
   }
 
   return (
     <div className="visualizacao-semana">
-      {dias.map((dia, index) => {
+      {semana.map((dia, index) => {
         const dataFormatadaDia = formatarData(dia);
 
         const agendamentosDoDia = agendamentos.filter(
@@ -40,12 +40,12 @@ const SemanaCalendario = () => {
           <CelulaCalendario
             key={index}
             data={dia}
-            eMesAtual={true} // Na visualização semanal, todos os dias são relevantes
+            eMesAtual={true} 
             eHoje={eHoje(dia)}
             agendamentos={agendamentosDoDia}
             onClick={aoClicarDia}
             aoClicarAgendamento={aoClicarAgendamento}
-            classeAdicional="celula-dia-semana" // Se precisar de estilos adicionais
+            classeAdicional="celula-dia-semana" 
           />
         );
       })}
