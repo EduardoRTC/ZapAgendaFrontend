@@ -7,6 +7,12 @@
   position: relative;
 }
 
+.celula-calendario:hover {
+  background-color: var(--azulPrincipal);
+  color: white;
+  border: 1px solid black;
+}
+
 .celula-calendario.fora-mes {
   background-color: #f9f9f9;
   color: #ccc;
@@ -16,6 +22,13 @@
   background-color: var(--azulPrincipal);
   color: #fff;
 }
+
+.celula-calendario.seleciona {
+  background-color: #E6FFFA; /* Verde água muito claro */
+  color: #2D3748; /* Texto em cinza escuro */
+  border: 1px solid #38B2AC; /* Borda verde suave */
+}
+
 
 .data-celula {
   font-weight: bold;
@@ -46,19 +59,48 @@
   font-size: 14px;
 }
 
-.agendamento.alerta .ponto-agendamento {
+.warning .ponto-agendamento {
   background-color: #f39c12;
 }
 
-.agendamento.info .ponto-agendamento {
-  background-color: #2196f3;
+.agendado .ponto-agendamento {
+  background-color: green;
 }
 
-.agendamento.sucesso .ponto-agendamento {
-  background-color: #2ecc71;
+.error .ponto-agendamento {
+  background-color: red;
 }
 
 .agendamento:hover {
   background-color: #f0f0f0;
   color: #000;
+}
+
+.celula-dia-semana {
+  border: 1px solid #ddd;
+  min-height: 120px;
+  padding: 10px;
+  position: relative;
+}
+
+.celula-dia-semana.hoje {
+  background-color: var(--azulPrincipal);
+  color: #fff;
+}
+
+.celula-dia-semana .data-celula {
+  font-weight: bold;
+}
+
+.celula-dia-semana .lista-agendamentos {
+  margin-top: 5px;
+}
+
+.celula-dia-semana .agendamento {
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+.celula-dia-semana .agendamento:hover {
+  background-color: #f0f0f0;
 }

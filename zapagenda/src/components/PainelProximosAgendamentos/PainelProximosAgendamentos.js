@@ -1,10 +1,10 @@
 // PainelProximosAgendamentos.jsx
 import React, { useContext } from "react";
-import { CalendarioContext } from "../../context/CalendarioContext";
 import "./PainelProximosAgendamentos.css";
+import { AgendamentosContext } from "../../context/AgendamentosContext";
 
 const PainelProximosAgendamentos = () => {
-  const { agendamentos } = useContext(CalendarioContext);
+  const { agendamentos } = useContext(AgendamentosContext)
   const hoje = "2024-10-11"; // Data de hoje como string
 
   // Filtrar agendamentos de hoje
