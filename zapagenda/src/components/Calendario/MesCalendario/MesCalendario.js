@@ -1,86 +1,54 @@
-import React, { useContext } from 'react';
+import React, { useContext} from 'react';
 import './MesCalendario.css';
 import { CalendarioContext } from '../../../context/CalendarioContext';
 import { AgendamentosContext } from '../../../context/AgendamentosContext';
 import CelulaCalendario from '../../CelulaCalendario/CelulaCalendario';
+import { endOfMonth, startOfMonth, subDays, addDays } from 'date-fns';
 
 const MesCalendario = () => {
   const {
     dataSelecionada,
     formatarData,
     eHoje,
-    aoClicarDia,
+    selecionaDiaClicado,
   } = useContext(CalendarioContext);
 
-  const { agendamentos,aoClicarAgendamento } = useContext(AgendamentosContext);
+  const { agendamentos, aoClicarAgendamento } = useContext(AgendamentosContext);
 
-  const inicioMes = new Date(
-    dataSelecionada.getFullYear(),
-    dataSelecionada.getMonth(),
-    1
-  );
-  const fimMes = new Date(
-    dataSelecionada.getFullYear(),
-    dataSelecionada.getMonth() + 1,
-    0
-  );
+  const inicioMes = startOfMonth(dataSelecionada);
+  const fimMes = endOfMonth(dataSelecionada);
+
   const diaInicioSemana = inicioMes.getDay();
   const totalDiasMes = fimMes.getDate();
   const dias = [];
 
-  if (diaInicioSemana > 0) {
-    const ultimoDiaMesAnterior = new Date(
-      dataSelecionada.getFullYear(),
-      dataSelecionada.getMonth(),
-      0
-    ).getDate();
-    for (let i = diaInicioSemana - 1; i >= 0; i--) {
-      dias.push(
-        new Date(
-          dataSelecionada.getFullYear(),
-          dataSelecionada.getMonth() - 1,
-          ultimoDiaMesAnterior - i
-        )
-      );
-    }
+  // Adiciona os dias do mês anterior para completar a semana
+  for (let i = diaInicioSemana - 1; i >= 0; i--) {
+    dias.push(subDays(inicioMes, i + 1));
   }
 
+  // Adiciona os dias do mês atual
   for (let i = 1; i <= totalDiasMes; i++) {
-    dias.push(
-      new Date(
-        dataSelecionada.getFullYear(),
-        dataSelecionada.getMonth(),
-        i
-      )
-    );
+    dias.push(new Date(dataSelecionada.getFullYear(), dataSelecionada.getMonth(), i));
   }
 
+  // Completa o restante com dias do próximo mês até preencher a grade semanal
   while (dias.length % 7 !== 0) {
-    const ultimoDia = dias[dias.length - 1];
-    dias.push(
-      new Date(
-        ultimoDia.getFullYear(),
-        ultimoDia.getMonth(),
-        ultimoDia.getDate() + 1
-      )
-    );
+    dias.push(addDays(dias[dias.length - 1], 1));
   }
 
   return (
     <>
       <div className="dias-semana-calendario">
-        {['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'].map(
-          (dia, index) => (
-            <div key={index} className="dia-semana-calendario">
-              {dia}
-            </div>
-          )
-        )}
+        {['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'].map((dia, index) => (
+          <div key={index} className="dia-semana-calendario">
+            {dia}
+          </div>
+        ))}
       </div>
       <div className="corpo-calendario">
         {dias.map((dia, index) => {
           const dataFormatadaDia = formatarData(dia);
-
           const agendamentosDoDia = agendamentos.filter(
             (agendamento) => agendamento.data === dataFormatadaDia
           );
@@ -89,12 +57,10 @@ const MesCalendario = () => {
             <CelulaCalendario
               key={index}
               data={dia}
-              eMesAtual={
-                dia.getMonth() === dataSelecionada.getMonth()
-              }
+              eMesAtual={dia.getMonth() === dataSelecionada.getMonth()}
               eHoje={eHoje(dia)}
               agendamentos={agendamentosDoDia}
-              onClick={aoClicarDia}
+              onClick={selecionaDiaClicado}
               aoClicarAgendamento={aoClicarAgendamento}
             />
           );

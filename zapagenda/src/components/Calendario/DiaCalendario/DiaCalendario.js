@@ -5,17 +5,11 @@ import { CalendarioContext } from '../../../context/CalendarioContext';
 import './DiaCalendario.css';
 
 export default function DiaCalendario() {
-  const {
-    dataSelecionada,
-    formatarData,
-  } = useContext(CalendarioContext);
-
+  const { dataSelecionada, formatarData } = useContext(CalendarioContext);
   const { agendamentos, aoClicarAgendamento } = useContext(AgendamentosContext);
 
-  const dataSelecionadaFormatada = formatarData(dataSelecionada);
-
   const agendamentosHoje = agendamentos.filter(
-    (agendamento) => agendamento.data === dataSelecionadaFormatada
+    (agendamento) => agendamento.data === formatarData(dataSelecionada)
   );
 
   const horas = Array.from({ length: 11 }, (_, i) => i + 8); // Horas de 8 às 18

@@ -3,6 +3,7 @@ import { appointments } from './appointmentsData';
 
 export const AgendamentosContext = createContext()
 
+
 export default function AgendamentosProvider({ children }) {
     const [agendamentos, setAgendamentos] = useState([]);
     const [agendamentoSelecionado, definirAgendamentoSelecionado] = useState(null);
