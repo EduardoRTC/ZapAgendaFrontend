@@ -24,11 +24,10 @@
 }
 
 .celula-calendario.seleciona {
-  background-color: #E6FFFA; /* Verde água muito claro */
-  color: #2D3748; /* Texto em cinza escuro */
-  border: 1px solid #38B2AC; /* Borda verde suave */
+  background-color: #e6fffa; /* Verde água muito claro */
+  color: #2d3748; /* Texto em cinza escuro */
+  border: 1px solid #38b2ac; /* Borda verde suave */
 }
-
 
 .data-celula {
   font-weight: bold;
@@ -74,6 +73,7 @@
 .agendamento:hover {
   background-color: #f0f0f0;
   color: #000;
+  border-radius: 5px;
 }
 
 .celula-dia-semana {
