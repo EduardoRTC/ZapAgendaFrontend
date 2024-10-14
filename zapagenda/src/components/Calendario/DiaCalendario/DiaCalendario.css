@@ -1,9 +1,16 @@
+/* Container principal que pode ser arrastado */
 .programacao-dia {
   display: grid;
   grid-template-columns: 100px 1fr;
   grid-auto-rows: 55px;
   width: 100%;
   margin-top: 20px;
+  cursor: grab; /* Cursor de grab em todo o container */
+  user-select: none; /* Impede a seleção de texto durante o arraste */
+}
+
+.programacao-dia:active {
+  cursor: grabbing; /* Cursor de grabbing quando arrastando */
 }
 
 .linha-programacao {
@@ -22,31 +29,31 @@
   display: flex;
   align-items: center;
   overflow-x: auto; /* Ativa a rolagem horizontal para toda a linha */
-  gap: 5px; /* Espaçamento entre os itens */
+  gap: 5px;
   padding: 10px;
-  white-space: nowrap; /* Impede a quebra de linha */
+  white-space: nowrap;
   border: 1px solid #ddd;
+  /* Remove o cursor de grab para essa área */
+  cursor: default;
+}
+.agendamento-programacao.overflow {
+  cursor: grab;
 }
 
-/* Container que agrupa os agendamentos e gerencia a rolagem */
-.agendamentos-container {
-  display: flex;
-  flex-wrap: nowrap; /* Evita que os itens quebrem linha */
-  overflow-x: auto; /* Ativa a rolagem horizontal */
-  gap: 5px;
-  align-items: center;
+.agendamento-programacao.overflow.active {
+  cursor: grabbing;
 }
 
 /* Estilo para cada item de agendamento */
 .item-agendamento {
   padding: 5px 10px;
   font-size: 14px;
-  min-width: 120px; /* Garante uma largura mínima */
-  max-width: 180px; /* Limite a largura máxima */
-  white-space: nowrap; /* Impede quebras de linha */
+  min-width: 120px;
+  max-width: 180px;
+  white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis; /* Adiciona reticências caso o texto seja muito longo */
-  flex-shrink: 0; /* Impede que os itens encolham */
+  text-overflow: ellipsis;
+  flex-shrink: 0;
   border-radius: 4px;
   color: #fff;
 }
@@ -77,44 +84,21 @@
   background-color: #7f8c8d; /* Cinza mais escuro ao passar o mouse */
 }
 
-/* Container para agendamentos extras com rolagem horizontal */
-.agendamentos-extras {
-  display: flex;
-  flex-direction: row;
-  overflow-x: auto;
-  padding-left: 10px; /* Espaçamento interno */
-  gap: 5px;
-  max-width: calc(150px * 4 + 5px * 3); /* Largura para 4 itens + espaçamento */
-}
-
 /* Personalizar a barra de rolagem */
 .agendamento-programacao::-webkit-scrollbar {
-  height: 6px; /* Altura da scrollbar horizontal */
+  height: 6px;
 }
 
 .agendamento-programacao::-webkit-scrollbar-track {
-  background: #f1f1f1; /* Cor do fundo da scrollbar */
-  border-radius: 10px; /* Bordas arredondadas para o track */
+  background: #f1f1f1;
+  border-radius: 10px;
 }
 
 .agendamento-programacao::-webkit-scrollbar-thumb {
-  background: #888; /* Cor da parte que você arrasta */
-  border-radius: 10px; /* Bordas arredondadas */
+  background: #888;
+  border-radius: 10px;
 }
 
 .agendamento-programacao::-webkit-scrollbar-thumb:hover {
-  background: #555; /* Cor quando o usuário está interagindo com a barra */
-}
-/* Estilo para quando não há agendamentos */
-.sem-agendamento {
-  color: #ccc;
-  font-style: italic;
-}
-
-/* Efeitos de hover para agendamentos */
-.item-agendamento:hover {
-  opacity: 0.9;
-  transform: scale(1.02);
-  transition: all 0.2s ease-in-out;
-  cursor: pointer;
+  background: #555;
 }
