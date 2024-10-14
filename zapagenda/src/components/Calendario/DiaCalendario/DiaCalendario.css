@@ -1,44 +1,120 @@
 .programacao-dia {
-    display: grid;
-    grid-template-columns: 100px 1fr;
-    grid-auto-rows: 50px;
-    width: 100%;
-    margin-top: 20px;
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  grid-auto-rows: 55px;
+  width: 100%;
+  margin-top: 20px;
 }
 
 .linha-programacao {
-    display: contents;
+  display: contents;
 }
 
-
 .hora-programacao {
-    padding: 10px;
-    background-color: #f5f5f5;
-    border: 1px solid #ddd;
-    text-align: center;
-    font-weight: bold;
+  padding: 10px;
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  text-align: center;
+  font-weight: bold;
 }
 
 .agendamento-programacao {
-    padding: 10px;
-    border: 1px solid #ddd;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
+  display: flex;
+  align-items: center;
+  overflow-x: auto; /* Ativa a rolagem horizontal para toda a linha */
+  gap: 5px; /* Espaçamento entre os itens */
+  padding: 10px;
+  white-space: nowrap; /* Impede a quebra de linha */
+  border: 1px solid #ddd;
 }
 
+/* Container que agrupa os agendamentos e gerencia a rolagem */
+.agendamentos-container {
+  display: flex;
+  flex-wrap: nowrap; /* Evita que os itens quebrem linha */
+  overflow-x: auto; /* Ativa a rolagem horizontal */
+  gap: 5px;
+  align-items: center;
+}
 
+/* Estilo para cada item de agendamento */
 .item-agendamento {
-    background-color: #2ecc71;
-    padding: 5px;
-    border-radius: 4px;
-    font-size: 14px;
-    width: 100%;
-    cursor: pointer;
+  padding: 5px 10px;
+  font-size: 14px;
+  min-width: 120px; /* Garante uma largura mínima */
+  max-width: 180px; /* Limite a largura máxima */
+  white-space: nowrap; /* Impede quebras de linha */
+  overflow: hidden;
+  text-overflow: ellipsis; /* Adiciona reticências caso o texto seja muito longo */
+  flex-shrink: 0; /* Impede que os itens encolham */
+  border-radius: 4px;
+  color: #fff;
 }
 
+/* Estilos específicos para cada tipo */
+.item-agendamento.success {
+  background-color: #2ecc71; /* Verde */
+}
 
+.item-agendamento.warning {
+  background-color: #f1c40f; /* Amarelo */
+}
+
+.item-agendamento.error {
+  background-color: rgb(252, 83, 83); /* Vermelho */
+}
+
+.item-agendamento.mais {
+  background-color: #95a5a6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 100px;
+  cursor: pointer;
+}
+
+.item-agendamento.mais:hover {
+  background-color: #7f8c8d; /* Cinza mais escuro ao passar o mouse */
+}
+
+/* Container para agendamentos extras com rolagem horizontal */
+.agendamentos-extras {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  padding-left: 10px; /* Espaçamento interno */
+  gap: 5px;
+  max-width: calc(150px * 4 + 5px * 3); /* Largura para 4 itens + espaçamento */
+}
+
+/* Personalizar a barra de rolagem */
+.agendamento-programacao::-webkit-scrollbar {
+  height: 6px; /* Altura da scrollbar horizontal */
+}
+
+.agendamento-programacao::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Cor do fundo da scrollbar */
+  border-radius: 10px; /* Bordas arredondadas para o track */
+}
+
+.agendamento-programacao::-webkit-scrollbar-thumb {
+  background: #888; /* Cor da parte que você arrasta */
+  border-radius: 10px; /* Bordas arredondadas */
+}
+
+.agendamento-programacao::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Cor quando o usuário está interagindo com a barra */
+}
+/* Estilo para quando não há agendamentos */
 .sem-agendamento {
-    color: #ccc;
-    font-style: italic;
+  color: #ccc;
+  font-style: italic;
+}
+
+/* Efeitos de hover para agendamentos */
+.item-agendamento:hover {
+  opacity: 0.9;
+  transform: scale(1.02);
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
 }

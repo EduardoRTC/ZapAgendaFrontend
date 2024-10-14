@@ -1,8 +1,7 @@
-// DiaCalendario.jsx
-import React, { useContext, useEffect } from 'react';
-import { AgendamentosContext } from '../../../context/AgendamentosContext';
-import { CalendarioContext } from '../../../context/CalendarioContext';
-import './DiaCalendario.css';
+import React, { useContext, useEffect } from "react";
+import { AgendamentosContext } from "../../../context/AgendamentosContext";
+import { CalendarioContext } from "../../../context/CalendarioContext";
+import "./DiaCalendario.css";
 
 export default function DiaCalendario() {
   const { dataSelecionada, formatarData } = useContext(CalendarioContext);
@@ -15,14 +14,17 @@ export default function DiaCalendario() {
   const horas = Array.from({ length: 11 }, (_, i) => i + 8); // Horas de 8 às 18
 
   useEffect(() => {
-    console.log('Valor dedataSelecionada:',dataSelecionada);
+    console.log("Valor da dataSelecionada:", dataSelecionada);
   }, [dataSelecionada]);
 
   return (
     <div className="programacao-dia">
       {horas.map((hora) => {
         const agendamentosNestaHora = agendamentosHoje.filter((agendamento) => {
-          const horaAgendamento = parseInt(agendamento.horario.split(':')[0], 10);
+          const horaAgendamento = parseInt(
+            agendamento.horario.split(":")[0],
+            10
+          );
           return horaAgendamento === hora;
         });
 
@@ -37,7 +39,7 @@ export default function DiaCalendario() {
                     className={`item-agendamento ${agendamento.tipo}`}
                     onClick={() => aoClicarAgendamento(agendamento)}
                   >
-                    {agendamento.descricao}
+                    {agendamento.horario} | {agendamento.doutor}
                   </div>
                 ))
               ) : (
