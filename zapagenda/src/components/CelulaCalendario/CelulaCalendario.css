@@ -23,12 +23,6 @@
   color: #fff;
 }
 
-.celula-calendario.seleciona {
-  background-color: #e6fffa; /* Verde água muito claro */
-  color: #2d3748; /* Texto em cinza escuro */
-  border: 1px solid #38b2ac; /* Borda verde suave */
-}
-
 .data-celula {
   font-weight: bold;
   margin-bottom: 5px;
