@@ -11,87 +11,106 @@ export default function DiaCalendario() {
     (agendamento) => agendamento.data === formatarData(dataSelecionada)
   );
 
-  const horas = Array.from({ length: 11 }, (_, i) => i + 8); // Horas de 8 às 18
+  // Horários padrão (de 8:00 às 18:00 a cada hora)
+  const horariosPadrao = Array.from({ length: 11 }, (_, i) => `${i + 8}:00`);
 
-  const agendamentoRefs = useRef([]);
-  const isDraggingRef = useRef(false);
-  const ignoreNextClickRef = useRef(false);
+  // Extrair horários dos agendamentos
+  const horariosAgendamentos = agendamentosHoje.map(
+    (agendamento) => agendamento.horario
+  );
+
+  // Combina os horários padrão com os horários dos agendamentos
+  const conjuntoDeHorarios = new Set([
+    ...horariosPadrao,
+    ...horariosAgendamentos,
+  ]);
+
+  // Ordenar os horários em ordem cronológica
+  const todosHorarios = Array.from(conjuntoDeHorarios).sort((a, b) => {
+    const [horaA, minutoA] = a.split(":").map(Number);
+    const [horaB, minutoB] = b.split(":").map(Number);
+    return horaA * 60 + minutoA - (horaB * 60 + minutoB);
+  });
+
+  const referenciasAgendamentos = useRef([]);
+  const estaArrastando = useRef(false);
+  const ignorarProximoClique = useRef(false);
 
   useEffect(() => {
     console.log("Valor da dataSelecionada:", dataSelecionada);
   }, [dataSelecionada]);
 
   // Função para habilitar o arraste
-  function enableDragScroll(el) {
-    let isDown = false;
-    let startX;
-    let scrollLeft;
+  function habilitarArrasteScroll(elemento) {
+    let clicado = false;
+    let inicioX;
+    let scrollInicial;
 
-    const mouseDownHandler = (e) => {
-      isDown = true;
-      el.classList.add("active");
-      startX = e.pageX - el.offsetLeft;
-      scrollLeft = el.scrollLeft;
-      isDraggingRef.current = false;
+    const manipuladorMouseDown = (e) => {
+      clicado = true;
+      elemento.classList.add("active");
+      inicioX = e.pageX - elemento.offsetLeft;
+      scrollInicial = elemento.scrollLeft;
+      estaArrastando.current = false;
     };
 
-    const mouseMoveHandler = (e) => {
-      if (!isDown) return;
+    const manipuladorMouseMove = (e) => {
+      if (!clicado) return;
       e.preventDefault();
-      isDraggingRef.current = true; // Agora estamos arrastando
-      const x = e.pageX - el.offsetLeft;
-      const walk = (x - startX) * 2; // Velocidade do scroll
-      el.scrollLeft = scrollLeft - walk;
+      estaArrastando.current = true; // Agora estamos arrastando
+      const x = e.pageX - elemento.offsetLeft;
+      const deslocamento = (x - inicioX) * 2; // Velocidade do scroll
+      elemento.scrollLeft = scrollInicial - deslocamento;
     };
 
-    const mouseUpHandler = () => {
-      isDown = false;
-      el.classList.remove("active");
-      if (isDraggingRef.current) {
-        ignoreNextClickRef.current = true; // Ignorar o próximo clique
+    const manipuladorMouseUp = () => {
+      clicado = false;
+      elemento.classList.remove("active");
+      if (estaArrastando.current) {
+        ignorarProximoClique.current = true; // Ignorar o próximo clique
       }
-      isDraggingRef.current = false;
+      estaArrastando.current = false;
     };
 
-    const mouseLeaveHandler = () => {
-      isDown = false;
-      el.classList.remove("active");
-      if (isDraggingRef.current) {
-        ignoreNextClickRef.current = true;
+    const manipuladorMouseLeave = () => {
+      clicado = false;
+      elemento.classList.remove("active");
+      if (estaArrastando.current) {
+        ignorarProximoClique.current = true;
       }
-      isDraggingRef.current = false;
+      estaArrastando.current = false;
     };
 
-    el.addEventListener("mousedown", mouseDownHandler);
-    el.addEventListener("mousemove", mouseMoveHandler);
-    el.addEventListener("mouseup", mouseUpHandler);
-    el.addEventListener("mouseleave", mouseLeaveHandler);
+    elemento.addEventListener("mousedown", manipuladorMouseDown);
+    elemento.addEventListener("mousemove", manipuladorMouseMove);
+    elemento.addEventListener("mouseup", manipuladorMouseUp);
+    elemento.addEventListener("mouseleave", manipuladorMouseLeave);
 
     return () => {
-      el.removeEventListener("mousedown", mouseDownHandler);
-      el.removeEventListener("mousemove", mouseMoveHandler);
-      el.removeEventListener("mouseup", mouseUpHandler);
-      el.removeEventListener("mouseleave", mouseLeaveHandler);
+      elemento.removeEventListener("mousedown", manipuladorMouseDown);
+      elemento.removeEventListener("mousemove", manipuladorMouseMove);
+      elemento.removeEventListener("mouseup", manipuladorMouseUp);
+      elemento.removeEventListener("mouseleave", manipuladorMouseLeave);
     };
   }
 
   useEffect(() => {
-    const cleanups = agendamentoRefs.current.map((el) => {
-      if (el) {
-        if (el.scrollWidth > el.clientWidth) {
-          el.classList.add("overflow");
-          return enableDragScroll(el);
+    const funcoesDeLimpeza = referenciasAgendamentos.current.map((elemento) => {
+      if (elemento) {
+        if (elemento.scrollWidth > elemento.clientWidth) {
+          elemento.classList.add("overflow");
+          return habilitarArrasteScroll(elemento);
         } else {
-          el.classList.remove("overflow");
+          elemento.classList.remove("overflow");
         }
       }
       return null;
     });
 
     return () => {
-      cleanups.forEach((cleanup) => {
-        if (cleanup) {
-          cleanup();
+      funcoesDeLimpeza.forEach((limpar) => {
+        if (limpar) {
+          limpar();
         }
       });
     };
@@ -99,30 +118,29 @@ export default function DiaCalendario() {
 
   return (
     <div className="programacao-dia">
-      {horas.map((hora) => {
-        const agendamentosNestaHora = agendamentosHoje.filter((agendamento) => {
-          const horaAgendamento = parseInt(
-            agendamento.horario.split(":")[0],
-            10
-          );
-          return horaAgendamento === hora;
-        });
+      {todosHorarios.map((horario, index) => {
+        const agendamentosNesteHorario = agendamentosHoje.filter(
+          (agendamento) => agendamento.horario === horario
+        );
 
         return (
-          <div key={hora} className="linha-programacao">
-            <div className="hora-programacao">{`${hora}:00`}</div>
+          <div key={horario} className="linha-programacao">
+            <div className="hora-programacao">{horario}</div>
             <div
               className="agendamento-programacao"
-              ref={(el) => (agendamentoRefs.current[hora - 8] = el)}
+              ref={(el) => (referenciasAgendamentos.current[index] = el)}
             >
-              {agendamentosNestaHora.length > 0 ? (
-                agendamentosNestaHora.map((agendamento) => (
+              {agendamentosNesteHorario.length > 0 ? (
+                agendamentosNesteHorario.map((agendamento) => (
                   <div
                     key={agendamento.id}
                     className={`item-agendamento ${agendamento.tipo}`}
                     onClick={() => {
-                      if (isDraggingRef.current || ignoreNextClickRef.current) {
-                        ignoreNextClickRef.current = false; // Resetar após ignorar
+                      if (
+                        estaArrastando.current ||
+                        ignorarProximoClique.current
+                      ) {
+                        ignorarProximoClique.current = false; // Resetar após ignorar
                         return;
                       }
                       aoClicarAgendamento(agendamento);
