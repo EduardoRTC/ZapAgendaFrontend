@@ -1,0 +1,15 @@
+/* SelecaoFuncionario.css */
+.selecao-funcionario {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.selecao-funcionario label {
+  font-weight: bold;
+}
+
+.selecao-funcionario select {
+  padding: 5px;
+  font-size: 14px;
+}

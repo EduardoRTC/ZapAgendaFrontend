@@ -4,11 +4,14 @@ import { CalendarioContext } from "../../../context/CalendarioContext";
 import "./DiaCalendario.css";
 
 export default function DiaCalendario() {
-  const { dataSelecionada, formatarData } = useContext(CalendarioContext);
+  const { dataSelecionada, formatarData, funcionarioSelecionado } =
+    useContext(CalendarioContext);
   const { agendamentos, aoClicarAgendamento } = useContext(AgendamentosContext);
 
   const agendamentosHoje = agendamentos.filter(
-    (agendamento) => agendamento.data === formatarData(dataSelecionada)
+    (agendamento) =>
+      agendamento.data === formatarData(dataSelecionada) &&
+      (!funcionarioSelecionado || agendamento.doutor === funcionarioSelecionado)
   );
 
   // Horários padrão (de 8:00 às 18:00 a cada hora)

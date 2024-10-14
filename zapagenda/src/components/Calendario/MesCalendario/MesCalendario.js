@@ -1,9 +1,16 @@
-import React, { useContext, useEffect } from 'react';
-import './MesCalendario.css';
-import { CalendarioContext } from '../../../context/CalendarioContext';
-import { AgendamentosContext } from '../../../context/AgendamentosContext';
-import CelulaCalendario from '../../CelulaCalendario/CelulaCalendario';
-import { endOfMonth, startOfMonth, subDays, addDays, isSameDay } from 'date-fns';
+// MesCalendario.js
+import React, { useContext, useEffect } from "react";
+import "./MesCalendario.css";
+import { CalendarioContext } from "../../../context/CalendarioContext";
+import { AgendamentosContext } from "../../../context/AgendamentosContext";
+import CelulaCalendario from "../../CelulaCalendario/CelulaCalendario";
+import {
+  endOfMonth,
+  startOfMonth,
+  subDays,
+  addDays,
+  isSameDay,
+} from "date-fns";
 
 const MesCalendario = () => {
   const {
@@ -11,6 +18,7 @@ const MesCalendario = () => {
     formatarData,
     eHoje,
     selecionaDiaClicado,
+    funcionarioSelecionado,
   } = useContext(CalendarioContext);
 
   const { agendamentos, aoClicarAgendamento } = useContext(AgendamentosContext);
@@ -29,7 +37,9 @@ const MesCalendario = () => {
 
   // Adiciona os dias do mês atual
   for (let i = 1; i <= totalDiasMes; i++) {
-    dias.push(new Date(dataSelecionada.getFullYear(), dataSelecionada.getMonth(), i));
+    dias.push(
+      new Date(dataSelecionada.getFullYear(), dataSelecionada.getMonth(), i)
+    );
   }
 
   // Completa o restante com dias do próximo mês até preencher a grade semanal
@@ -37,15 +47,14 @@ const MesCalendario = () => {
     dias.push(addDays(dias[dias.length - 1], 1));
   }
 
-  // Adiciona o console.log para verificar valores
   useEffect(() => {
-    console.log('Data Selecionada:', dataSelecionada);
+    console.log("Data Selecionada:", dataSelecionada);
   }, [dataSelecionada]);
 
   return (
     <>
       <div className="dias-semana-calendario">
-        {['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'].map((dia, index) => (
+        {["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"].map((dia, index) => (
           <div key={index} className="dia-semana-calendario">
             {dia}
           </div>
@@ -55,10 +64,11 @@ const MesCalendario = () => {
         {dias.map((dia, index) => {
           const dataFormatadaDia = formatarData(dia);
           const agendamentosDoDia = agendamentos.filter(
-            (agendamento) => agendamento.data === dataFormatadaDia
+            (agendamento) =>
+              agendamento.data === dataFormatadaDia &&
+              (!funcionarioSelecionado ||
+                agendamento.doutor === funcionarioSelecionado)
           );
-
-
 
           return (
             <React.Fragment key={index}>
@@ -69,7 +79,13 @@ const MesCalendario = () => {
                 agendamentos={agendamentosDoDia}
                 onClick={selecionaDiaClicado}
                 aoClicarAgendamento={aoClicarAgendamento}
-                classeAdicional={eHoje(dia) ? "" : isSameDay(dia, dataSelecionada) ? "seleciona" : "" }
+                classeAdicional={
+                  eHoje(dia)
+                    ? ""
+                    : isSameDay(dia, dataSelecionada)
+                    ? "seleciona"
+                    : ""
+                }
               />
             </React.Fragment>
           );

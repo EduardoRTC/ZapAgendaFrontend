@@ -1,10 +1,10 @@
-import React, { useContext} from 'react';
-import './SemanaCalendario.css';
-import { CalendarioContext } from '../../../context/CalendarioContext';
-import { AgendamentosContext } from '../../../context/AgendamentosContext';
-import CelulaCalendario from '../../CelulaCalendario/CelulaCalendario';
-import { addDays, isSameDay, startOfWeek } from 'date-fns';
-
+// SemanaCalendario.js
+import React, { useContext } from "react";
+import "./SemanaCalendario.css";
+import { CalendarioContext } from "../../../context/CalendarioContext";
+import { AgendamentosContext } from "../../../context/AgendamentosContext";
+import CelulaCalendario from "../../CelulaCalendario/CelulaCalendario";
+import { addDays, isSameDay, startOfWeek } from "date-fns";
 
 const SemanaCalendario = () => {
   const {
@@ -12,23 +12,26 @@ const SemanaCalendario = () => {
     formatarData,
     eHoje,
     selecionaDiaClicado,
+    funcionarioSelecionado,
   } = useContext(CalendarioContext);
 
   const { agendamentos, aoClicarAgendamento } = useContext(AgendamentosContext);
 
-  //Gera o calendário semanal
-  const inicioSemana = startOfWeek(dataSelecionada, { weekStartsOn: 0 })
+  // Gera o calendário semanal
+  const inicioSemana = startOfWeek(dataSelecionada, { weekStartsOn: 0 });
   const semana = [];
   for (let i = 0; i < 7; i++) {
-    semana.push(addDays(inicioSemana, i))
+    semana.push(addDays(inicioSemana, i));
   }
 
   return (
     <div className="visualizacao-semana">
       {semana.map((dia, index) => {
-
         const agendamentosDoDia = agendamentos.filter(
-          (agendamento) => agendamento.data === formatarData(dia)
+          (agendamento) =>
+            agendamento.data === formatarData(dia) &&
+            (!funcionarioSelecionado ||
+              agendamento.doutor === funcionarioSelecionado)
         );
 
         return (
@@ -40,7 +43,13 @@ const SemanaCalendario = () => {
             agendamentos={agendamentosDoDia}
             onClick={selecionaDiaClicado}
             aoClicarAgendamento={aoClicarAgendamento}
-            classeAdicional={eHoje(dia) ? "" : isSameDay(dia, dataSelecionada) ? "seleciona" : "" }
+            classeAdicional={
+              eHoje(dia)
+                ? ""
+                : isSameDay(dia, dataSelecionada)
+                ? "seleciona"
+                : ""
+            }
           />
         );
       })}
