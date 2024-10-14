@@ -1,9 +1,9 @@
-import React, { useContext } from 'react';
+import React, { useContext} from 'react';
 import './SemanaCalendario.css';
 import { CalendarioContext } from '../../../context/CalendarioContext';
 import { AgendamentosContext } from '../../../context/AgendamentosContext';
 import CelulaCalendario from '../../CelulaCalendario/CelulaCalendario';
-import { addDays, startOfWeek } from 'date-fns';
+import { addDays, isSameDay, startOfWeek } from 'date-fns';
 
 
 const SemanaCalendario = () => {
@@ -40,7 +40,7 @@ const SemanaCalendario = () => {
             agendamentos={agendamentosDoDia}
             onClick={selecionaDiaClicado}
             aoClicarAgendamento={aoClicarAgendamento}
-            classeAdicional="celula-dia-semana"
+            classeAdicional={eHoje(dia) ? "" : isSameDay(dia, dataSelecionada) ? "seleciona" : "" }
           />
         );
       })}

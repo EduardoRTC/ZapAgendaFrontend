@@ -1,16 +1,7 @@
-// CelulaCalendario.jsx
 import React from 'react';
 import './CelulaCalendario.css';
 
-const CelulaCalendario = ({
-  data,
-  eMesAtual,
-  eHoje,
-  agendamentos,
-  onClick,
-  aoClicarAgendamento,
-  classeAdicional = '', // Nova prop opcional
-}) => {
+const CelulaCalendario = ({ data, eMesAtual, eHoje, agendamentos, onClick, aoClicarAgendamento, classeAdicional = '', }) => {
   return (
     <div
       className={`celula-calendario ${classeAdicional} ${eMesAtual ? '' : 'fora-mes'

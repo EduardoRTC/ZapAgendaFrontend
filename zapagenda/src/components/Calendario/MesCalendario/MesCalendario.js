@@ -1,9 +1,9 @@
-import React, { useContext} from 'react';
+import React, { useContext, useEffect } from 'react';
 import './MesCalendario.css';
 import { CalendarioContext } from '../../../context/CalendarioContext';
 import { AgendamentosContext } from '../../../context/AgendamentosContext';
 import CelulaCalendario from '../../CelulaCalendario/CelulaCalendario';
-import { endOfMonth, startOfMonth, subDays, addDays } from 'date-fns';
+import { endOfMonth, startOfMonth, subDays, addDays, isSameDay } from 'date-fns';
 
 const MesCalendario = () => {
   const {
@@ -37,6 +37,11 @@ const MesCalendario = () => {
     dias.push(addDays(dias[dias.length - 1], 1));
   }
 
+  // Adiciona o console.log para verificar valores
+  useEffect(() => {
+    console.log('Data Selecionada:', dataSelecionada);
+  }, [dataSelecionada]);
+
   return (
     <>
       <div className="dias-semana-calendario">
@@ -53,16 +58,20 @@ const MesCalendario = () => {
             (agendamento) => agendamento.data === dataFormatadaDia
           );
 
+
+
           return (
-            <CelulaCalendario
-              key={index}
-              data={dia}
-              eMesAtual={dia.getMonth() === dataSelecionada.getMonth()}
-              eHoje={eHoje(dia)}
-              agendamentos={agendamentosDoDia}
-              onClick={selecionaDiaClicado}
-              aoClicarAgendamento={aoClicarAgendamento}
-            />
+            <React.Fragment key={index}>
+              <CelulaCalendario
+                data={dia}
+                eMesAtual={dia.getMonth() === dataSelecionada.getMonth()}
+                eHoje={eHoje(dia)}
+                agendamentos={agendamentosDoDia}
+                onClick={selecionaDiaClicado}
+                aoClicarAgendamento={aoClicarAgendamento}
+                classeAdicional={eHoje(dia) ? "" : isSameDay(dia, dataSelecionada) ? "seleciona" : "" }
+              />
+            </React.Fragment>
           );
         })}
       </div>

@@ -1,5 +1,5 @@
 // DiaCalendario.jsx
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { AgendamentosContext } from '../../../context/AgendamentosContext';
 import { CalendarioContext } from '../../../context/CalendarioContext';
 import './DiaCalendario.css';
@@ -13,6 +13,10 @@ export default function DiaCalendario() {
   );
 
   const horas = Array.from({ length: 11 }, (_, i) => i + 8); // Horas de 8 às 18
+
+  useEffect(() => {
+    console.log('Valor dedataSelecionada:',dataSelecionada);
+  }, [dataSelecionada]);
 
   return (
     <div className="programacao-dia">
