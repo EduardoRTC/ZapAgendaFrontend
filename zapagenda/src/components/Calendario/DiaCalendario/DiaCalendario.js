@@ -1,43 +1,56 @@
-// DiaCalendario.jsx
-import React, { useContext, useEffect } from 'react';
-import { AgendamentosContext } from '../../../context/AgendamentosContext';
-import { CalendarioContext } from '../../../context/CalendarioContext';
-import './DiaCalendario.css';
+import React, { useContext, useRef, useEffect } from "react";
+import { AgendamentosContext } from "../../../context/AgendamentosContext";
+import { CalendarioContext } from "../../../context/CalendarioContext";
+import useArrasteMouse from "../../../hooks/useArrasteMouse";
+import "./DiaCalendario.css";
 
 export default function DiaCalendario() {
-  const { dataSelecionada, formatarData } = useContext(CalendarioContext);
-  const { agendamentos, aoClicarAgendamento } = useContext(AgendamentosContext);
+  const { dataSelecionada } = useContext(CalendarioContext);
+  const {
+    filtrarAgendamentosPorDia,
+    obterHorariosParaDia,
+    aoClicarAgendamento,
+  } = useContext(AgendamentosContext);
 
-  const agendamentosHoje = agendamentos.filter(
-    (agendamento) => agendamento.data === formatarData(dataSelecionada)
+  const agendamentosHoje = filtrarAgendamentosPorDia(dataSelecionada);
+  const todosHorarios = obterHorariosParaDia(dataSelecionada);
+
+  const referenciasAgendamentos = useRef([]);
+  const { estaArrastando, ignorarProximoClique } = useArrasteMouse(
+    referenciasAgendamentos
   );
-
-  const horas = Array.from({ length: 11 }, (_, i) => i + 8); // Horas de 8 às 18
-
-  useEffect(() => {
-    console.log('Valor dedataSelecionada:',dataSelecionada);
-  }, [dataSelecionada]);
 
   return (
     <div className="programacao-dia">
-      {horas.map((hora) => {
-        const agendamentosNestaHora = agendamentosHoje.filter((agendamento) => {
-          const horaAgendamento = parseInt(agendamento.horario.split(':')[0], 10);
-          return horaAgendamento === hora;
-        });
+      {todosHorarios.map((horario, index) => {
+        const agendamentosNesteHorario = agendamentosHoje.filter(
+          (agendamento) => agendamento.horario === horario
+        );
 
         return (
-          <div key={hora} className="linha-programacao">
-            <div className="hora-programacao">{`${hora}:00`}</div>
-            <div className="agendamento-programacao">
-              {agendamentosNestaHora.length > 0 ? (
-                agendamentosNestaHora.map((agendamento) => (
+          <div key={horario} className="linha-programacao">
+            <div className="hora-programacao">{horario}</div>
+            <div
+              className="agendamento-programacao"
+              ref={(el) => (referenciasAgendamentos.current[index] = el)}
+            >
+              {agendamentosNesteHorario.length > 0 ? (
+                agendamentosNesteHorario.map((agendamento) => (
                   <div
                     key={agendamento.id}
                     className={`item-agendamento ${agendamento.tipo}`}
-                    onClick={() => aoClicarAgendamento(agendamento)}
+                    onClick={() => {
+                      if (
+                        estaArrastando.current ||
+                        ignorarProximoClique.current
+                      ) {
+                        ignorarProximoClique.current = false;
+                        return;
+                      }
+                      aoClicarAgendamento(agendamento);
+                    }}
                   >
-                    {agendamento.descricao}
+                    {agendamento.horario} | {agendamento.doutor}
                   </div>
                 ))
               ) : (

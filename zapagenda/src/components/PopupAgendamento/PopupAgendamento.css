@@ -1,41 +1,92 @@
-/* PopupAgendamento.css */
-.popup-agendamento {
+/* Fundo acinzentado */
+.popup-overlay {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1000; /* Aumente o z-index para garantir que o popup fique acima de outros elementos */
-  background-color: rgba(0, 0, 0, 0.5);
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.267); /* Fundo escurecido */
+  z-index: 100; /* Aumentar o z-index da overlay */
+}
+
+/* Container principal do popup */
+.popup-agendamento {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px; /* Aumentando a largura */
+  max-width: 90%;
+  background-color: #e0e0e0;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra maior */
+  z-index: 1000;
+  font-size: 1.1em; /* Aumentando o tamanho da fonte */
+  line-height: 1.6em; /* Mais espaço entre as linhas */
+}
+
+/* Conteúdo do popup */
+.popup-conteudo {
+  padding: 30px; /* Aumentando o espaçamento interno */
+  position: relative;
+}
+
+/* Título do popup */
+.titulo-popup {
+  font-size: 1.8em; /* Aumentando o tamanho do título */
+  margin-bottom: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Informações do popup */
+.info-popup p {
+  margin: 10px 0; /* Aumentando o espaçamento entre as linhas */
+  font-size: 1.1em; /* Aumentando o tamanho do texto */
+}
+
+/* Botão de fechar */
+.fechar-popup {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: 2px solid #ccc; /* Adiciona uma borda fina */
+  border-radius: 5px; /* Deixa a borda redonda */
+  font-size: 1.8em;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
-.conteudo-popup {
-  background-color: #fff;
-  padding: 20px;
-  width: 90%;
-  max-width: 500px;
-  border-radius: 5px;
-  position: relative;
-  z-index: 1001; /* Certifique-se de que o conteúdo também tenha um z-index alto */
-}
-
-.conteudo-popup h3 {
-  margin-top: 0;
-}
-
-.fechar-popup {
-  margin-top: 15px;
-  padding: 5px 10px;
-  cursor: pointer;
-  background-color: #2196f3;
-  color: #fff;
-  border: none;
-  transition: background-color 0.3s ease;
-}
-
+/* Efeito hover para o botão de fechar */
 .fechar-popup:hover {
-  background-color: #1976d2;
+  background-color: #f2f2f2; /* Adiciona um fundo leve ao passar o mouse */
+  border-color: #999; /* Escurece a borda ao passar o mouse */
+}
+
+.anexo-item {
+  display: inline-block;
+  background-color: #808080;
+  padding: 7px 15px;
+  border-radius: 5px;
+  font-size: 0.95em;
+  color: #fff;
+  margin-right: 10px;
+  margin-top: 10px;
+  box-shadow: inset;
+}
+
+/* Observações */
+.observacoes-popup {
+  margin-top: 15px;
+  padding: 15px;
+  background-color: #fefefe;
+  border-radius: 6px;
+  font-size: 1.1em; /* Texto um pouco maior nas observações */
+  color: #000;
 }

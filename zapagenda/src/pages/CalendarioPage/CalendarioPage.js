@@ -52,12 +52,12 @@ const CalendarioPage = () => {
       <div className="container-principal">
         <BarraLateral />
         <div className="container-calendario">
-          <AgendamentosProvider>
-            <CalendarioProvider>
+          <CalendarioProvider>
+            <AgendamentosProvider>
               <Calendario />
               <PainelProximosAgendamentos />
-            </CalendarioProvider>
-          </AgendamentosProvider>
+            </AgendamentosProvider>
+          </CalendarioProvider>
         </div>
       </div>
     </div>

@@ -1,11 +1,20 @@
-import React from 'react';
-import './CelulaCalendario.css';
+import React from "react";
+import "./CelulaCalendario.css";
 
-const CelulaCalendario = ({ data, eMesAtual, eHoje, agendamentos, onClick, aoClicarAgendamento, classeAdicional = '', }) => {
+const CelulaCalendario = ({
+  data,
+  eMesAtual,
+  eHoje,
+  agendamentos,
+  onClick,
+  aoClicarAgendamento,
+  classeAdicional = "",
+}) => {
   return (
     <div
-      className={`celula-calendario ${classeAdicional} ${eMesAtual ? '' : 'fora-mes'
-        } ${eHoje ? 'hoje' : ''}`}
+      className={`celula-calendario ${classeAdicional} ${
+        eMesAtual ? "" : "fora-mes"
+      } ${eHoje ? "hoje" : ""}`}
       onClick={() => onClick(data)}
     >
       <div className="data-celula">{data.getDate()}</div>
@@ -20,9 +29,7 @@ const CelulaCalendario = ({ data, eMesAtual, eHoje, agendamentos, onClick, aoCli
             }}
           >
             <span className="ponto-agendamento"></span>
-            <span className="descricao-agendamento">
-              {agendamento.descricao}
-            </span>
+            <span className="descricao-agendamento">{`${agendamento.horario} | ${agendamento.doutor}`}</span>
           </div>
         ))}
       </div>
