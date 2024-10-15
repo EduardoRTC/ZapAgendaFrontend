@@ -1,47 +1,47 @@
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useContext, useRef, useEffect } from "react";
 import { AgendamentosContext } from "../../../context/AgendamentosContext";
 import { CalendarioContext } from "../../../context/CalendarioContext";
 import "./DiaCalendario.css";
 
 export default function DiaCalendario() {
-  const { dataSelecionada, formatarData, funcionarioSelecionado } =
-    useContext(CalendarioContext);
-  const { agendamentos, aoClicarAgendamento } = useContext(AgendamentosContext);
+  const { dataSelecionada } = useContext(CalendarioContext); // Pega a data do Calendário
+  const {
+    filtrarAgendamentosPorDia,
+    obterHorariosParaDia,
+    aoClicarAgendamento,
+  } = useContext(AgendamentosContext); // Funções do contexto de Agendamentos
 
-  const agendamentosHoje = agendamentos.filter(
-    (agendamento) =>
-      agendamento.data === formatarData(dataSelecionada) &&
-      (!funcionarioSelecionado || agendamento.doutor === funcionarioSelecionado)
-  );
-
-  // Horários padrão (de 8:00 às 18:00 a cada hora)
-  const horariosPadrao = Array.from({ length: 11 }, (_, i) => `${i + 8}:00`);
-
-  // Extrair horários dos agendamentos
-  const horariosAgendamentos = agendamentosHoje.map(
-    (agendamento) => agendamento.horario
-  );
-
-  // Combina os horários padrão com os horários dos agendamentos
-  const conjuntoDeHorarios = new Set([
-    ...horariosPadrao,
-    ...horariosAgendamentos,
-  ]);
-
-  // Ordenar os horários em ordem cronológica
-  const todosHorarios = Array.from(conjuntoDeHorarios).sort((a, b) => {
-    const [horaA, minutoA] = a.split(":").map(Number);
-    const [horaB, minutoB] = b.split(":").map(Number);
-    return horaA * 60 + minutoA - (horaB * 60 + minutoB);
-  });
+  // Obter agendamentos do dia e horários ordenados
+  const agendamentosHoje = filtrarAgendamentosPorDia(dataSelecionada);
+  const todosHorarios = obterHorariosParaDia(dataSelecionada);
 
   const referenciasAgendamentos = useRef([]);
   const estaArrastando = useRef(false);
   const ignorarProximoClique = useRef(false);
 
   useEffect(() => {
-    console.log("Valor da dataSelecionada:", dataSelecionada);
+    console.log("Data selecionada:", dataSelecionada);
   }, [dataSelecionada]);
+
+  useEffect(() => {
+    const funcoesDeLimpeza = referenciasAgendamentos.current.map((elemento) => {
+      if (elemento) {
+        if (elemento.scrollWidth > elemento.clientWidth) {
+          elemento.classList.add("overflow");
+          return habilitarArrasteScroll(elemento);
+        } else {
+          elemento.classList.remove("overflow");
+        }
+      }
+      return null;
+    });
+
+    return () => {
+      funcoesDeLimpeza.forEach((limpar) => {
+        if (limpar) limpar();
+      });
+    };
+  }, [agendamentosHoje]);
 
   // Função para habilitar o arraste
   function habilitarArrasteScroll(elemento) {
@@ -60,27 +60,23 @@ export default function DiaCalendario() {
     const manipuladorMouseMove = (e) => {
       if (!clicado) return;
       e.preventDefault();
-      estaArrastando.current = true; // Agora estamos arrastando
+      estaArrastando.current = true;
       const x = e.pageX - elemento.offsetLeft;
-      const deslocamento = (x - inicioX) * 2; // Velocidade do scroll
+      const deslocamento = (x - inicioX) * 2;
       elemento.scrollLeft = scrollInicial - deslocamento;
     };
 
     const manipuladorMouseUp = () => {
       clicado = false;
       elemento.classList.remove("active");
-      if (estaArrastando.current) {
-        ignorarProximoClique.current = true; // Ignorar o próximo clique
-      }
+      if (estaArrastando.current) ignorarProximoClique.current = true;
       estaArrastando.current = false;
     };
 
     const manipuladorMouseLeave = () => {
       clicado = false;
       elemento.classList.remove("active");
-      if (estaArrastando.current) {
-        ignorarProximoClique.current = true;
-      }
+      if (estaArrastando.current) ignorarProximoClique.current = true;
       estaArrastando.current = false;
     };
 
@@ -96,28 +92,6 @@ export default function DiaCalendario() {
       elemento.removeEventListener("mouseleave", manipuladorMouseLeave);
     };
   }
-
-  useEffect(() => {
-    const funcoesDeLimpeza = referenciasAgendamentos.current.map((elemento) => {
-      if (elemento) {
-        if (elemento.scrollWidth > elemento.clientWidth) {
-          elemento.classList.add("overflow");
-          return habilitarArrasteScroll(elemento);
-        } else {
-          elemento.classList.remove("overflow");
-        }
-      }
-      return null;
-    });
-
-    return () => {
-      funcoesDeLimpeza.forEach((limpar) => {
-        if (limpar) {
-          limpar();
-        }
-      });
-    };
-  }, [agendamentosHoje]);
 
   return (
     <div className="programacao-dia">
@@ -143,7 +117,7 @@ export default function DiaCalendario() {
                         estaArrastando.current ||
                         ignorarProximoClique.current
                       ) {
-                        ignorarProximoClique.current = false; // Resetar após ignorar
+                        ignorarProximoClique.current = false;
                         return;
                       }
                       aoClicarAgendamento(agendamento);
