@@ -1,15 +1,62 @@
-/* SelecaoFuncionario.css */
-.selecao-funcionario {
+/* Estilo do container do dropdown */
+.dropdown {
+  position: relative;
+  width: 200px;
+  font-size: 16px;
+}
+
+/* Estilo do dropdown fechado */
+.dropdown-select {
+  padding: 10px;
+  background-color: white;
+  border: 1px solid #ccc;
+  cursor: pointer;
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 5px;
+  user-select: none; /* Impede a seleção de texto */
 }
 
-.selecao-funcionario label {
-  font-weight: bold;
+/* Seta do dropdown */
+.dropdown-arrow {
+  margin-left: 10px;
+  transition: transform 0.3s ease;
 }
 
-.selecao-funcionario select {
-  padding: 5px;
-  font-size: 14px;
+/* Setinha virada para cima quando aberto */
+.dropdown-arrow.open {
+  transform: rotate(180deg);
+}
+
+/* Menu de opções */
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-top: none;
+  max-height: 350px;
+  overflow-y: auto;
+  z-index: 1000;
+  box-shadow: 0 6px 6px rgba(0, 0, 0, 0.2); /* Sombra para o menu aberto */
+  user-select: none; /* Impede a seleção de texto */
+}
+
+/* Itens do dropdown */
+.dropdown-item {
+  padding: 10px;
+  border-bottom: 1px solid #ddd; /* Linha embaixo de cada item */
+  cursor: pointer;
+  user-select: none; /* Impede a seleção de texto */
+}
+
+.dropdown-item:last-child {
+  border-bottom: none; /* Remove a linha do último item */
+}
+
+/* Efeito ao passar o mouse */
+.dropdown-item:hover {
+  background-color: #f0f0f0;
 }
