@@ -1,4 +1,3 @@
-// ControlesDeNavegacao.jsx
 import React, { useContext } from "react";
 import { CalendarioContext } from "../../context/CalendarioContext";
 import FiltroFuncionarios from "./FiltroFuncionarios/FiltroFuncionarios";
@@ -36,30 +35,44 @@ const ControlesNavegacao = () => {
     setDataSelecionada(novaData);
   };
 
+  const mesAno = dataSelecionada.toLocaleString("default", {
+    month: "long",
+    year: "numeric",
+  });
+
   return (
     <div className="controles-calendario">
-      {/* Inclui o componente de seleção de funcionário */}
+      {/* Filtro de Funcionários no lado esquerdo */}
       <FiltroFuncionarios />
-      <button onClick={anterior}>&lt;</button>
-      <button
-        onClick={() => setModoVisualizacao("dia")}
-        className={modoVisualizacao === "dia" ? "selecionado" : ""}
-      >
-        Dia
-      </button>
-      <button
-        onClick={() => setModoVisualizacao("semana")}
-        className={modoVisualizacao === "semana" ? "selecionado" : ""}
-      >
-        Semana
-      </button>
-      <button
-        onClick={() => setModoVisualizacao("mes")}
-        className={modoVisualizacao === "mes" ? "selecionado" : ""}
-      >
-        Mês
-      </button>
-      <button onClick={proximo}>&gt;</button>
+
+      {/* Título do mês e ano centralizado */}
+      <div className="titulo">
+        {mesAno.charAt(0).toUpperCase() + mesAno.slice(1)}
+      </div>
+
+      {/* Botões de navegação */}
+      <div>
+        <button onClick={anterior}>&lt;</button>
+        <button
+          onClick={() => setModoVisualizacao("dia")}
+          className={modoVisualizacao === "dia" ? "selecionado" : ""}
+        >
+          Dia
+        </button>
+        <button
+          onClick={() => setModoVisualizacao("semana")}
+          className={modoVisualizacao === "semana" ? "selecionado" : ""}
+        >
+          Semana
+        </button>
+        <button
+          onClick={() => setModoVisualizacao("mes")}
+          className={modoVisualizacao === "mes" ? "selecionado" : ""}
+        >
+          Mês
+        </button>
+        <button onClick={proximo}>&gt;</button>
+      </div>
     </div>
   );
 };
