@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState, useContext } from "react";
-import { format, isSameDay, parse } from "date-fns";
+import { format, isSameDay, parse, parseISO, compareAsc } from "date-fns";
 import { appointments } from "./appointmentsData"; // Dados dos agendamentos
 import PopupAgendamento from "../components/PopupAgendamento/PopupAgendamento";
 import { CalendarioContext } from "./CalendarioContext";
@@ -63,6 +63,33 @@ export default function AgendamentosProvider({ children }) {
     return todosHorarios;
   };
 
+  // Função para obter os próximos 3 agendamentos baseados na hora atual
+  const obterProximosAgendamentos = () => {
+    const hoje = new Date();
+    const horaAtual = format(hoje, "HH:mm");
+
+    // Filtra os agendamentos do dia atual e que ocorrem após a hora atual
+    const agendamentosDeHoje = agendamentos
+      .filter((agendamento) => {
+        return (
+          isSameDay(parseISO(agendamento.data), hoje) &&
+          compareAsc(
+            parse(agendamento.horario, "HH:mm", hoje),
+            parse(horaAtual, "HH:mm", hoje)
+          ) > 0
+        );
+      })
+      .sort((a, b) => {
+        return compareAsc(
+          parse(`${a.data}T${a.horario}`, "yyyy-MM-dd'T'HH:mm", hoje),
+          parse(`${b.data}T${b.horario}`, "yyyy-MM-dd'T'HH:mm", hoje)
+        );
+      });
+
+    // Retorna os próximos 3 agendamentos
+    return agendamentosDeHoje.slice(0, 3);
+  };
+
   return (
     <AgendamentosContext.Provider
       value={{
@@ -71,6 +98,7 @@ export default function AgendamentosProvider({ children }) {
         agendamentoSelecionado,
         filtrarAgendamentosPorDia,
         obterHorariosParaDia,
+        obterProximosAgendamentos, // Exportando a função dos próximos agendamentos
       }}
     >
       {children}
