@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import { CalendarioContext } from "../../context/CalendarioContext";
 import FiltroFuncionarios from "./FiltroFuncionarios/FiltroFuncionarios";
+import { format, addDays, addMonths, subDays, subMonths } from "date-fns";
+import { ptBR } from "date-fns/locale";
 import "./ControlesNavegacao.css";
 
 const ControlesNavegacao = () => {
@@ -12,33 +14,29 @@ const ControlesNavegacao = () => {
   } = useContext(CalendarioContext);
 
   const proximo = () => {
-    const novaData = new Date(dataSelecionada);
-    if (modoVisualizacao === "dia") {
-      novaData.setDate(novaData.getDate() + 1);
-    } else if (modoVisualizacao === "semana") {
-      novaData.setDate(novaData.getDate() + 7);
-    } else if (modoVisualizacao === "mes") {
-      novaData.setMonth(novaData.getMonth() + 1);
-    }
+    const novaData = modoVisualizacao === "dia"
+      ? addDays(dataSelecionada, 1)
+      : modoVisualizacao === "semana"
+        ? addDays(dataSelecionada, 7)
+        : addMonths(dataSelecionada, 1);
+
     setDataSelecionada(novaData);
   };
 
   const anterior = () => {
-    const novaData = new Date(dataSelecionada);
-    if (modoVisualizacao === "dia") {
-      novaData.setDate(novaData.getDate() - 1);
-    } else if (modoVisualizacao === "semana") {
-      novaData.setDate(novaData.getDate() - 7);
-    } else if (modoVisualizacao === "mes") {
-      novaData.setMonth(novaData.getMonth() - 1);
-    }
+    const novaData = modoVisualizacao === "dia"
+      ? subDays(dataSelecionada, 1)
+      : modoVisualizacao === "semana"
+        ? subDays(dataSelecionada, 7)
+        : subMonths(dataSelecionada, 1);
+
     setDataSelecionada(novaData);
   };
 
-  const mesAno = dataSelecionada.toLocaleString("default", {
-    month: "long",
-    year: "numeric",
-  });
+  // Define o título de acordo com o modo de visualização
+  const tituloData = modoVisualizacao === "dia"
+    ? format(dataSelecionada, "d 'de' MMMM 'de' yyyy", { locale: ptBR })
+    : format(dataSelecionada, "MMMM 'de' yyyy", { locale: ptBR });
 
   return (
     <div className="controles-calendario">
@@ -47,7 +45,7 @@ const ControlesNavegacao = () => {
 
       {/* Título do mês e ano centralizado */}
       <div className="titulo">
-        {mesAno.charAt(0).toUpperCase() + mesAno.slice(1)}
+        {tituloData.charAt(0).toUpperCase() + tituloData.slice(1)}
       </div>
 
       {/* Botões de navegação */}

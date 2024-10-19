@@ -5,6 +5,7 @@ import { CalendarioContext } from "../../../context/CalendarioContext";
 import { AgendamentosContext } from "../../../context/AgendamentosContext";
 import CelulaCalendario from "../../CelulaCalendario/CelulaCalendario";
 import { addDays, isSameDay, startOfWeek } from "date-fns";
+import DiasDaSemana from "../DiasDaSemana/DiasDaSemana";
 
 const SemanaCalendario = () => {
   const {
@@ -16,8 +17,7 @@ const SemanaCalendario = () => {
   } = useContext(CalendarioContext);
 
   const { agendamentos, aoClicarAgendamento } = useContext(AgendamentosContext);
-
-  // Gera o calendário semanal
+  
   const inicioSemana = startOfWeek(dataSelecionada, { weekStartsOn: 0 });
   const semana = [];
   for (let i = 0; i < 7; i++) {
@@ -25,35 +25,40 @@ const SemanaCalendario = () => {
   }
 
   return (
-    <div className="visualizacao-semana">
-      {semana.map((dia, index) => {
-        const agendamentosDoDia = agendamentos.filter(
-          (agendamento) =>
-            agendamento.data === formatarData(dia) &&
-            (!funcionarioSelecionado ||
-              agendamento.doutor === funcionarioSelecionado)
-        );
+    <>
+      <DiasDaSemana />
+      <div className="visualizacao-semana">
+        {semana.map((dia, index) => {
+          const agendamentosDoDia = agendamentos.filter(
+            (agendamento) =>
+              agendamento.data === formatarData(dia) &&
+              (!funcionarioSelecionado ||
+                agendamento.doutor === funcionarioSelecionado)
+          );
 
-        return (
-          <CelulaCalendario
-            key={index}
-            data={dia}
-            eMesAtual={true}
-            eHoje={eHoje(dia)}
-            agendamentos={agendamentosDoDia}
-            onClick={selecionaDiaClicado}
-            aoClicarAgendamento={aoClicarAgendamento}
-            classeAdicional={
-              eHoje(dia)
-                ? ""
-                : isSameDay(dia, dataSelecionada)
-                ? "seleciona"
-                : ""
-            }
-          />
-        );
-      })}
-    </div>
+          return (
+            <CelulaCalendario
+              key={index}
+              data={dia}
+              eMesAtual={true}
+              eHoje={eHoje(dia)}
+              agendamentos={agendamentosDoDia}
+              onClick={selecionaDiaClicado}
+              aoClicarAgendamento={aoClicarAgendamento}
+              classeAdicional={
+                eHoje(dia)
+                  ? ""
+                  : isSameDay(dia, dataSelecionada)
+                    ? "seleciona"
+                    : ""
+              }
+              semana={true}
+            />
+          );
+        })}
+      </div>
+    </>
+
   );
 };
 

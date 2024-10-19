@@ -11,6 +11,7 @@ import {
   addDays,
   isSameDay,
 } from "date-fns";
+import DiasDaSemana from "../DiasDaSemana/DiasDaSemana";
 
 const MesCalendario = () => {
   const {
@@ -53,13 +54,7 @@ const MesCalendario = () => {
 
   return (
     <>
-      <div className="dias-semana-calendario">
-        {["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"].map((dia, index) => (
-          <div key={index} className="dia-semana-calendario">
-            {dia}
-          </div>
-        ))}
-      </div>
+      <DiasDaSemana />
       <div className="corpo-calendario">
         {dias.map((dia, index) => {
           const dataFormatadaDia = formatarData(dia);
@@ -83,8 +78,8 @@ const MesCalendario = () => {
                   eHoje(dia)
                     ? ""
                     : isSameDay(dia, dataSelecionada)
-                    ? "seleciona"
-                    : ""
+                      ? "seleciona"
+                      : ""
                 }
               />
             </React.Fragment>

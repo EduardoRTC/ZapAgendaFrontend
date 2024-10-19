@@ -9,10 +9,11 @@ const CelulaCalendario = ({
   onClick,
   aoClicarAgendamento,
   classeAdicional = "",
+  semana
 }) => {
   return (
     <div
-      className={`celula-calendario ${classeAdicional} ${
+      className={`celula-calendario ${classeAdicional} ${semana === true ? "celula-semana" : ""} ${
         eMesAtual ? "" : "fora-mes"
       } ${eHoje ? "hoje" : ""}`}
       onClick={() => onClick(data)}
