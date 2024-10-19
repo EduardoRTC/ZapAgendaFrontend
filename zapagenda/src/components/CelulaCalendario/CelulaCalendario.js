@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./CelulaCalendario.css";
+import { AgendamentosContext } from "../../context/AgendamentosContext";
+import { CalendarioContext } from "../../context/CalendarioContext";
 
 const CelulaCalendario = ({
   data,
@@ -7,26 +9,27 @@ const CelulaCalendario = ({
   eHoje,
   agendamentos,
   onClick,
-  aoClicarAgendamento,
   classeAdicional = "",
   semana
 }) => {
+
+  const { modoVisualizacao } = useContext(CalendarioContext)
+  const { aoClicarAgendamento } = useContext(AgendamentosContext)
+
   return (
     <div
-      className={`celula-calendario ${classeAdicional} ${semana === true ? "celula-semana" : ""} ${
-        eMesAtual ? "" : "fora-mes"
-      } ${eHoje ? "hoje" : ""}`}
+      className={`celula-calendario ${classeAdicional} ${semana === true ? "celula-semana" : ""} ${eMesAtual ? "" : "fora-mes"} ${eHoje ? "hoje" : ""}`}
       onClick={() => onClick(data)}
     >
       <div className="data-celula">{data.getDate()}</div>
-      <div className="lista-agendamentos">
+      <div className={modoVisualizacao === "mes" ? "lista-agendamentos" : "lista-agendamentos-semana"}>
         {agendamentos.map((agendamento) => (
           <div
             key={agendamento.id}
             className={`agendamento ${agendamento.tipo}`}
             onClick={(e) => {
               e.stopPropagation();
-              aoClicarAgendamento(agendamento);
+              aoClicarAgendamento(agendamento, eMesAtual);
             }}
           >
             <span className="ponto-agendamento"></span>

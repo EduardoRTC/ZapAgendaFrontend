@@ -22,7 +22,7 @@ const MesCalendario = () => {
     funcionarioSelecionado,
   } = useContext(CalendarioContext);
 
-  const { agendamentos, aoClicarAgendamento } = useContext(AgendamentosContext);
+  const { agendamentos} = useContext(AgendamentosContext);
 
   const inicioMes = startOfMonth(dataSelecionada);
   const fimMes = endOfMonth(dataSelecionada);
@@ -69,7 +69,6 @@ const MesCalendario = () => {
                 eHoje={eHoje(dia)}
                 agendamentos={agendamentosDoDia}
                 onClick={selecionaDiaClicado}
-                aoClicarAgendamento={aoClicarAgendamento}
                 classeAdicional={
                   eHoje(dia)
                     ? ""

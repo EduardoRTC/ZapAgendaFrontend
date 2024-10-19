@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useEffect } from "react";
+import React, { useContext, useRef} from "react";
 import { AgendamentosContext } from "../../../context/AgendamentosContext";
 import { CalendarioContext } from "../../../context/CalendarioContext";
 import useArrasteMouse from "../../../hooks/useArrasteMouse";

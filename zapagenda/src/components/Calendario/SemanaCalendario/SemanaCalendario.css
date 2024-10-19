@@ -1,5 +1,5 @@
 .visualizacao-semana {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    height: 71.5vh;
-  } 
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  height: 65vh;
+}

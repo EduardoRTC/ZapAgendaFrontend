@@ -1,6 +1,6 @@
 // CalendarioPage.jsx
 import React, { useEffect } from "react";
-import Calendario from "../../components/Calendario/Calendario";
+import Calendario from "../../components/Calendario/Calendario/Calendario";
 import { CalendarioProvider } from "../../context/CalendarioContext";
 import "./CalendarioPage.css";
 import BarraLateral from "../../components/BarraLateral/BarraLateral";

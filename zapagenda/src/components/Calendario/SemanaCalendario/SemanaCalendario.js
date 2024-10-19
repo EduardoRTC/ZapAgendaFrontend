@@ -1,4 +1,3 @@
-// SemanaCalendario.js
 import React, { useContext } from "react";
 import "./SemanaCalendario.css";
 import { CalendarioContext } from "../../../context/CalendarioContext";
@@ -16,7 +15,7 @@ const SemanaCalendario = () => {
     funcionarioSelecionado,
   } = useContext(CalendarioContext);
 
-  const { agendamentos, aoClicarAgendamento } = useContext(AgendamentosContext);
+  const { agendamentos} = useContext(AgendamentosContext);
   
   const inicioSemana = startOfWeek(dataSelecionada, { weekStartsOn: 0 });
   const semana = [];
@@ -44,7 +43,6 @@ const SemanaCalendario = () => {
               eHoje={eHoje(dia)}
               agendamentos={agendamentosDoDia}
               onClick={selecionaDiaClicado}
-              aoClicarAgendamento={aoClicarAgendamento}
               classeAdicional={
                 eHoje(dia)
                   ? ""

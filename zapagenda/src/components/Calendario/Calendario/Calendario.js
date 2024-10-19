@@ -1,11 +1,11 @@
 // Calendario.jsx
 import React, { useContext } from "react";
-import { CalendarioContext } from "../../context/CalendarioContext";
-import ControlesNavegacao from "../ControlesNavegacao/ControlesNavegacao";
+import { CalendarioContext } from "../../../context/CalendarioContext.js";
+import ControlesNavegacao from "../../ControlesNavegacao/ControlesNavegacao.js";
 
-import DiaCalendario from "./DiaCalendario/DiaCalendario.js";
-import SemanaCalendario from "./SemanaCalendario/SemanaCalendario.js";
-import MesCalendario from "./MesCalendario/MesCalendario.js";
+import DiaCalendario from "../DiaCalendario/DiaCalendario.js";
+import SemanaCalendario from "../SemanaCalendario/SemanaCalendario.js";
+import MesCalendario from "../MesCalendario/MesCalendario.js";
 import "./Calendario.css";
 
 const Calendario = () => {
@@ -26,7 +26,9 @@ const Calendario = () => {
       <div className="container-cabecalho-calendario">
         <ControlesNavegacao />
       </div>
-      {renderizarCalendario()}
+      <div className="calendario-conteudo">
+        {renderizarCalendario()}
+      </div>
     </div>
   );
 };

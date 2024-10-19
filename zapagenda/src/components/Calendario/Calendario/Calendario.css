@@ -6,8 +6,6 @@
   box-sizing: border-box;
   border-radius: 10px;
   max-height: 770px;
-  overflow-y: auto; /* Adiciona rolagem vertical quando o conteúdo extrapolar */
-  overflow-x: hidden; /* Previne a rolagem horizontal */
 }
 
 .container-cabecalho-calendario {
