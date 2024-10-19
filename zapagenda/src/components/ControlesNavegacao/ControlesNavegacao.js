@@ -33,23 +33,19 @@ const ControlesNavegacao = () => {
     setDataSelecionada(novaData);
   };
 
-  // Define o título de acordo com o modo de visualização
   const tituloData = modoVisualizacao === "dia"
     ? format(dataSelecionada, "d 'de' MMMM 'de' yyyy", { locale: ptBR })
     : format(dataSelecionada, "MMMM 'de' yyyy", { locale: ptBR });
 
   return (
     <div className="controles-calendario">
-      {/* Filtro de Funcionários no lado esquerdo */}
       <FiltroFuncionarios />
 
-      {/* Título do mês e ano centralizado */}
       <div className="titulo">
         {tituloData.charAt(0).toUpperCase() + tituloData.slice(1)}
       </div>
 
-      {/* Botões de navegação */}
-      <div>
+      <div id="Navegacao-dia">
         <button onClick={anterior}>&lt;</button>
         <button
           onClick={() => setModoVisualizacao("dia")}

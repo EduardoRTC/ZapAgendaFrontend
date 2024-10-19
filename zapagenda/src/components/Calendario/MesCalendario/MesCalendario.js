@@ -1,5 +1,5 @@
 // MesCalendario.js
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import "./MesCalendario.css";
 import { CalendarioContext } from "../../../context/CalendarioContext";
 import { AgendamentosContext } from "../../../context/AgendamentosContext";
@@ -47,10 +47,6 @@ const MesCalendario = () => {
   while (dias.length % 7 !== 0) {
     dias.push(addDays(dias[dias.length - 1], 1));
   }
-
-  useEffect(() => {
-    console.log("Data Selecionada:", dataSelecionada);
-  }, [dataSelecionada]);
 
   return (
     <>
